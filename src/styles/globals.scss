@@ -1,6 +1,6 @@
 :focus {
   outline: transparent;
-  box-shadow: 0 0 0 2px #80f2ff;
+  box-shadow: 0 0 0 2px $blue-100;
 
   &:not(:focus-visible) {
     outline: none;
@@ -16,15 +16,36 @@
   box-sizing: border-box;
 }
 
+::selection {
+  background-color: $white;
+  color: $blue-900;
+}
+
+::-webkit-scrollbar {
+  background-color: $blue-900;
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $blue-500;
+  border-radius: 10px;
+}
+
+img,
+svg {
+  pointer-events: none;
+}
+
 body {
-  background: hsl(200, 100%, 3%);
-  color: #fff;
+  background: $gray-900;
+  color: $white;
   -webkit-font-smoothing: antialiased;
 }
 
 input {
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
+  color: $white;
 }
 
 body,
@@ -36,4 +57,24 @@ button {
 
 a {
   text-decoration: none;
+  color: inherit;
+}
+
+button,
+a {
+  transition: 200ms filter;
+}
+
+button:hover {
+  filter: brightness(1.2);
+}
+
+a:hover {
+  filter: brightness(0.8);
+}
+
+@media (max-width: 992px) {
+  html {
+    font-size: 87.5%;
+  }
 }

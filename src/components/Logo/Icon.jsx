@@ -1,3 +1,5 @@
+export function Icon({ variant }) {
+  return (
     <svg
       width="44"
       height="48"
@@ -10,3 +12,5 @@
         fill="#065E7C"
       />
     </svg>
+  );
+}
