@@ -1,6 +1,7 @@
 .wrapper {
   min-height: 100vh;
   display: grid;
+  overflow-x: hidden;
 
   grid-template-rows: 8rem auto 5rem;
 
@@ -12,6 +13,111 @@
 .content {
   max-width: 90rem;
 
-  margin: 2rem auto;
+  margin: 10rem auto;
+
   padding: 0 1rem;
+
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+
+    width: min(70rem, 90vw);
+    margin-bottom: 3rem;
+
+    border-radius: 8px;
+
+    flex-wrap: wrap;
+    height: 16.25rem;
+
+    .heroText {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+
+      padding: 0 2rem;
+
+      &::before {
+        content: '';
+        height: 14.25rem;
+        width: 100%;
+
+        position: absolute;
+        right: 0;
+
+        z-index: -999;
+        background: linear-gradient(180deg, #091e26 0%, #00131c 100%);
+
+        border-radius: 8px;
+
+        @media screen and (min-width: $tablet) {
+          top: 0;
+        }
+
+        @media screen and (min-width: $desktop) {
+          top: 0;
+          height: 16.25rem;
+        }
+      }
+
+      h1 {
+        font-size: clamp(2rem, 2rem + 0.5vw, 2.5rem);
+        line-height: clamp(3rem, 3rem + 0.5vw, 3.5rem);
+        font-weight: 500;
+        z-index: 9999;
+
+        text-shadow: 1px 1px 2px $gray-900;
+      }
+
+      span {
+        font-size: clamp(0.8rem, 0.8rem + 0.5vw, 1rem);
+        line-height: clamp(0.8rem, 0.8rem + 0.5vw, 1rem);
+        line-height: 1.4rem;
+        z-index: 9999;
+        text-shadow: 1px 1px 2px $gray-900;
+      }
+    }
+
+    .imgWrapper {
+      @media screen and (min-width: $desktop) {
+        position: relative;
+      }
+    }
+
+    img {
+      width: 95vw;
+      position: absolute;
+      bottom: 4.3rem;
+      left: 0;
+
+      @media screen and (min-width: $tablet) {
+        width: min(32rem, 90vw);
+        top: -6.425rem;
+      }
+
+      @media screen and (min-width: $desktop) {
+        width: 39.5rem;
+
+        top: -17.125rem;
+      }
+    }
+  }
+
+  section + section {
+    margin-top: 2rem;
+  }
+
+  section {
+    width: 100%;
+
+    .sectionTitle {
+      display: block;
+      font-weight: 500;
+      font-size: 2rem;
+      padding-bottom: 2.4rem;
+    }
+  }
 }

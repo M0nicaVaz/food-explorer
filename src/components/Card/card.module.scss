@@ -1,0 +1,95 @@
+.wrapper {
+  background-color: $gray-50;
+  border: 1px solid $blue-50;
+  border-radius: 16px;
+
+  width: 18.75rem;
+  height: 32rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+
+  padding: 1.3125rem 1.8125rem 2.25rem;
+
+  button {
+    border: none;
+  }
+
+  .likeBtn {
+    background: none;
+    color: $white;
+    align-self: flex-end;
+
+    &:hover {
+      color: $red-500;
+    }
+  }
+
+  img {
+    width: clamp(8rem, 8rem + 5vw, 11rem);
+  }
+
+  .title {
+    font-size: clamp(1.2rem, 1rem + 1vw, 1.5rem);
+  }
+
+  .title::after {
+    content: '>';
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 1rem;
+    list-style: 1.4rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+  }
+
+  .price {
+    color: $blue-100;
+    font-size: clamp(1.4rem, 1.4rem + 0.5vw, 2rem);
+  }
+
+  footer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    gap: 1rem;
+
+    .stepper {
+      display: flex;
+      align-items: center;
+    }
+
+    .stepperBtn {
+      background: none;
+      color: $white;
+
+      &:first-child:hover {
+        color: $red-500;
+      }
+
+      &:last-child:hover {
+        color: $blue-100;
+      }
+    }
+
+    span {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin: 0 1rem;
+    }
+
+    .addBtn {
+      background-color: $red-500;
+      color: $white;
+      border-radius: 8px;
+      padding: 12px 24px;
+    }
+  }
+}
