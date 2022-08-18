@@ -1,11 +1,12 @@
+import Carousel from 'react-elastic-carousel';
 import heroSVG from '../../assets/hero.svg';
 import { Card } from '../../components/Card';
 import { Footer } from '../../components/Footer';
 import { Header } from '../../components/Header';
+import { Wrapper } from '../../components/Wrapper';
 import '../../styles/overrideCarousel.css';
+import { meals } from '../../utils/data';
 import styles from './home.module.scss';
-
-import Carousel from 'react-elastic-carousel';
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -16,7 +17,7 @@ const breakPoints = [
 
 export function Home() {
   return (
-    <div className={styles.wrapper}>
+    <Wrapper>
       <Header />
       <main className={styles.content}>
         <div className={styles.hero}>
@@ -63,7 +64,6 @@ export function Home() {
 
         <section>
           <strong className={styles.sectionTitle}> Bebidas</strong>
-
           <Carousel
             breakPoints={breakPoints}
             pagination={false}
@@ -77,6 +77,6 @@ export function Home() {
         </section>
       </main>
       <Footer />
-    </div>
+    </Wrapper>
   );
 }

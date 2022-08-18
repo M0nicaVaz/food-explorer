@@ -34,10 +34,11 @@
 
   .title {
     font-size: clamp(1.2rem, 1rem + 1vw, 1.5rem);
-  }
 
-  .title::after {
-    content: '>';
+    &::after {
+      content: '>';
+      margin-left: 0.5rem;
+    }
   }
 
   .subtitle {

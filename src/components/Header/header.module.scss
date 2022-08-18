@@ -125,9 +125,9 @@
 
 @media (min-width: $desktop) {
   .header {
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    gap: 2rem;
+    gap: 3rem;
 
     .buttons {
       width: 1.25rem;

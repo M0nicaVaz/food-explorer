@@ -1,0 +1,101 @@
+.content {
+  width: 100%;
+  max-width: 90rem;
+  margin: 2rem auto;
+  padding: 0 1rem;
+
+  .backBtn {
+    background: none;
+    border: none;
+    color: $white;
+
+    display: flex;
+    align-items: center;
+
+    font-weight: 500;
+    font-size: 1.5rem;
+  }
+
+  .details {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    padding: 2rem;
+
+    .addBtn {
+      background-color: $red-500;
+      color: $white;
+      border-radius: 8px;
+      padding: 12px;
+
+      margin-left: 1.5rem;
+
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .price {
+      color: $blue-100;
+      font-size: clamp(1.4rem, 1.4rem + 0.5vw, 2rem);
+    }
+
+    .mainImg {
+      width: clamp(16.375rem, 10rem + 15vw, 24.375rem);
+    }
+
+    .contentWrapper {
+      max-width: 38rem;
+
+      .title {
+        font-weight: 500;
+        font-size: 2.5rem;
+        line-height: 3.5rem;
+        text-align: center;
+
+        @media screen and (min-width: $desktop) {
+          text-align: left;
+        }
+      }
+
+      .subtitle {
+        display: block;
+        font-size: 1.5rem;
+        line-height: 2.1rem;
+        margin-bottom: 1.625rem;
+        text-align: center;
+
+        @media screen and (min-width: $desktop) {
+          text-align: left;
+        }
+      }
+    }
+
+    .ingredients {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2.6875rem;
+      justify-content: center;
+
+      @media screen and (min-width: $desktop) {
+        justify-content: flex-start;
+      }
+    }
+
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      @media screen and (min-width: $desktop) {
+        justify-content: flex-start;
+      }
+
+      > span {
+        margin-right: 3.3125rem;
+      }
+    }
+  }
+}

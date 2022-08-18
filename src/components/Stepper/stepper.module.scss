@@ -1,0 +1,29 @@
+.stepper {
+  display: flex;
+  align-items: center;
+
+  .stepperBtn {
+    border: none;
+    background: none;
+    color: $white;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+    &:first-child:hover {
+      color: $red-500;
+    }
+
+    &:last-child:hover {
+      color: $blue-100;
+    }
+  }
+
+  span {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin: 0 1rem;
+  }
+}
