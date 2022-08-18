@@ -29,9 +29,9 @@ export function Header() {
         </button>
       </div>
 
-      <a href="#" className={styles.desktopOnly}>
+      <Link to="/archive" className={styles.desktopOnly}>
         <span>Meus favoritos</span>
-      </a>
+      </Link>
 
       <div className={styles.search}>
         <MagnifyingGlass size={22} />
@@ -40,15 +40,15 @@ export function Header() {
       </div>
 
       <div className={`${styles.menu} ${isOpen && styles.open}`}>
-        <a href="#">Meus favoritos</a>
+        <Link to="/archive">Meus favoritos</Link>
 
-        <Link to="/orders" className={styles.orderBtn}>
+        <Link to="/order" className={styles.orderBtn}>
           <Receipt size={22} />
           Meus pedidos(0)
         </Link>
       </div>
 
-      <Link to="/orders" className={`${styles.orderBtn} ${styles.desktopOnly}`}>
+      <Link to="/order" className={`${styles.orderBtn} ${styles.desktopOnly}`}>
         <Receipt size={22} />
         Meus pedidos(0)
       </Link>

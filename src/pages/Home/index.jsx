@@ -5,7 +5,6 @@ import { Footer } from '../../components/Footer';
 import { Header } from '../../components/Header';
 import { Wrapper } from '../../components/Wrapper';
 import '../../styles/overrideCarousel.css';
-import { meals } from '../../utils/data';
 import styles from './home.module.scss';
 
 const breakPoints = [

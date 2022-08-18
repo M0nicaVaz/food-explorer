@@ -1,0 +1,45 @@
+form {
+  width: min(100%, 348px);
+  margin: 0 auto;
+  padding: 3.6875rem 1rem;
+
+  button {
+    background-color: $red-500;
+    color: $white;
+
+    font-size: 0.875rem;
+    font-weight: 500;
+
+    width: 100%;
+
+    padding: 0.75rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 5px;
+  }
+
+  input {
+    background-color: transparent;
+    border: 1px solid $white;
+    border-radius: 5px;
+    padding: 0.75rem 0.875rem;
+
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  label {
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .split {
+    display: flex;
+    gap: 17px;
+    margin: 2.3125rem 0;
+  }
+}

@@ -12,8 +12,12 @@
   }
 
   .container {
-    width: min(90rem, 70vw);
+    width: min(90rem, 80vw);
     overflow-x: scroll;
+
+    @media screen and (min-width: $desktop) {
+      width: 100%;
+    }
   }
 
   table {

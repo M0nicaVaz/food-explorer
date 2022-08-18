@@ -79,6 +79,10 @@ a:hover {
   filter: brightness(0.8);
 }
 
+ul {
+  list-style: none;
+}
+
 @media (max-width: $desktop) {
   html {
     font-size: 87.5%;

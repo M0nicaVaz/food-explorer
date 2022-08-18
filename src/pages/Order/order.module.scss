@@ -1,0 +1,69 @@
+.content {
+  max-width: 90rem;
+  margin: 4rem auto;
+  display: flex;
+  gap: 4.6875rem;
+  flex-wrap: wrap;
+  padding: 0 2rem 2rem;
+
+  strong {
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 2.8rem;
+
+    display: block;
+    margin-bottom: 2rem;
+  }
+
+  .order {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .payment {
+    .paymentBox {
+      width: min(85vw, 33.125rem);
+      display: flex;
+      flex-direction: column;
+
+      .btnWrapper {
+        width: 100%;
+        display: flex;
+        height: 5.0625rem;
+
+        button {
+          width: 100%;
+          border: 1px solid $blue-50;
+          background-color: transparent;
+          color: $white;
+
+          font-family: 'Roboto', sans-serif;
+          font-weight: 400;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+
+          &:disabled {
+            background-color: rgba(255, 255, 255, 0.05);
+          }
+        }
+
+        img {
+          width: 1.5rem;
+        }
+      }
+
+      .btnWrapper + div {
+        border: 1px solid $blue-50;
+
+        > img {
+          display: block;
+          margin: 2.9375rem auto;
+          width: 15.625rem;
+        }
+      }
+    }
+  }
+}

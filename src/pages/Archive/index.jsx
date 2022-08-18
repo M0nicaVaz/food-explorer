@@ -2,9 +2,9 @@ import { Footer } from '../../components/Footer';
 import { Header } from '../../components/Header';
 import { Wrapper } from '../../components/Wrapper';
 
-import styles from './orders.module.scss';
+import styles from './archive.module.scss';
 
-export function Orders() {
+export function Archive() {
   return (
     <Wrapper>
       <Header />
