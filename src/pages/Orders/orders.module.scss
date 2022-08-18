@@ -1,0 +1,81 @@
+.content {
+  max-width: 90rem;
+
+  margin: 2rem auto;
+  padding: 0 2.75rem 4rem;
+
+  overflow: hidden;
+
+  .title {
+    font-weight: 500;
+    margin: 2.125rem 0;
+  }
+
+  .container {
+    width: min(90rem, 70vw);
+    overflow-x: scroll;
+  }
+
+  table {
+    text-align: left;
+    border-spacing: 0;
+    overflow: hidden;
+
+    thead th {
+      padding: 1.3125rem;
+
+      border: 1px solid $blue-50;
+    }
+
+    td:nth-child(3) {
+      max-width: min(100%, 42.2rem);
+    }
+
+    tr:first-child th:first-child {
+      border: 1px solid $blue-50;
+      border-top-left-radius: 10px;
+    }
+
+    tr:first-child th:last-child {
+      border: 1px solid $blue-50;
+      border-top-right-radius: 10px;
+      min-width: 9.1rem;
+    }
+
+    tbody td {
+      padding: 1rem;
+      border: 1px solid $blue-50;
+    }
+
+    tbody td {
+      line-height: 2.6rem;
+    }
+
+    td:first-child {
+      min-width: 9.1rem;
+      > div {
+        display: inline-block;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
+
+.dot {
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+
+  &.green {
+    background-color: $green-500;
+  }
+
+  &.red {
+    background-color: $red-500;
+  }
+
+  &.yellow {
+    background-color: $yellow-500;
+  }
+}

@@ -1,5 +1,6 @@
 import { List, MagnifyingGlass, Receipt, SignOut, X } from 'phosphor-react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Logo } from '../../components/Logo';
 import styles from './header.module.scss';
 
@@ -8,7 +9,9 @@ export function Header() {
 
   return (
     <header className={styles.header}>
-      <Logo variant={'small'} />
+      <Link to="/">
+        <Logo variant={'small'} />
+      </Link>
 
       <div className={styles.buttons}>
         <button
@@ -39,16 +42,16 @@ export function Header() {
       <div className={`${styles.menu} ${isOpen && styles.open}`}>
         <a href="#">Meus favoritos</a>
 
-        <button className={styles.orderBtn}>
+        <Link to="/orders" className={styles.orderBtn}>
           <Receipt size={22} />
           Meus pedidos(0)
-        </button>
+        </Link>
       </div>
 
-      <button className={`${styles.orderBtn} ${styles.desktopOnly}`}>
+      <Link to="/orders" className={`${styles.orderBtn} ${styles.desktopOnly}`}>
         <Receipt size={22} />
         Meus pedidos(0)
-      </button>
+      </Link>
     </header>
   );
 }
