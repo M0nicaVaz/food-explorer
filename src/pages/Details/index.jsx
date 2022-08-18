@@ -45,12 +45,14 @@ export function Details({ dish }) {
             <footer>
               <span className={styles.price}>R$ {'79,97' || dish.price}</span>
 
-              <Stepper />
+              <div className={styles.stepper}>
+                <Stepper />
 
-              <button className={styles.addBtn}>
-                <Receipt />
-                incluir
-              </button>
+                <button className={styles.addBtn}>
+                  <Receipt />
+                  incluir
+                </button>
+              </div>
             </footer>
           </div>
         </div>

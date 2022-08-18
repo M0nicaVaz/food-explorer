@@ -3,6 +3,7 @@
   max-width: 90rem;
   margin: 2rem auto;
   padding: 0 1rem;
+  display: grid;
 
   .backBtn {
     background: none;
@@ -17,6 +18,8 @@
   }
 
   .details {
+    place-self: center;
+
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -27,6 +30,7 @@
     .addBtn {
       background-color: $red-500;
       color: $white;
+      border: none;
       border-radius: 8px;
       padding: 12px;
 
@@ -86,15 +90,22 @@
 
     footer {
       display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
       align-items: center;
       justify-content: center;
 
       @media screen and (min-width: $desktop) {
         justify-content: flex-start;
+        gap: 3.3125rem;
       }
 
-      > span {
-        margin-right: 3.3125rem;
+      .stepper {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
       }
     }
   }
