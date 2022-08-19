@@ -25,7 +25,7 @@ export function Header() {
         </button>
 
         <button title="Sair" className={styles.btnLogOut}>
-          <SignOut size={22} />
+          <SignOut size={24} />
         </button>
       </div>
 
@@ -44,13 +44,13 @@ export function Header() {
 
         <Link to="/order" className={styles.orderBtn}>
           <Receipt size={22} />
-          Meus pedidos(0)
+          Meu pedido (0)
         </Link>
       </div>
 
       <Link to="/order" className={`${styles.orderBtn} ${styles.desktopOnly}`}>
         <Receipt size={22} />
-        Meus pedidos(0)
+        Meu pedido (0)
       </Link>
     </header>
   );

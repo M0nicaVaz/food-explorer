@@ -4,6 +4,7 @@ import Pix from '../../assets/pix.svg';
 import qrCode from '../../assets/qrCode.svg';
 import { Footer } from '../../components/Footer';
 import { Header } from '../../components/Header';
+import { OrderItem } from '../../components/OrderItem';
 import { PaymentForm } from '../../components/PaymentForm';
 import { Wrapper } from '../../components/Wrapper';
 import styles from './order.module.scss';
@@ -30,15 +31,13 @@ export function Order() {
           <strong>Meu Pedido</strong>
 
           <ul>
-            <li className={styles.orderItem}>
-              <img src="" alt="" />
-              <span>1 x Salada Radish</span>
-              <span>R$ 25,97</span>
-              <button>Excluir</button>
-            </li>
+            <OrderItem />
+            <OrderItem />
+            <OrderItem />
+            <OrderItem />
           </ul>
 
-          <span>Total: R$ 103,88</span>
+          <span className={styles.total}>Total: R$ 103,88</span>
         </div>
 
         <div className={styles.payment}>

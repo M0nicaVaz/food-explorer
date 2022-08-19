@@ -19,7 +19,7 @@ export function PaymentForm() {
         </div>
       </div>
 
-      <button>
+      <button disabled>
         <Receipt size={22} />
         Finalizar Pagamento
       </button>
