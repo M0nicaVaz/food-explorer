@@ -1,0 +1,150 @@
+.content {
+  max-width: 90rem;
+  margin: 2rem auto 4rem;
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem;
+
+  .backBtn {
+    background: none;
+    border: none;
+    color: $white;
+
+    display: flex;
+    align-items: center;
+
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  strong {
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 2.8rem;
+
+    display: block;
+  }
+
+  form {
+    width: min(70rem, 80vw);
+    display: flex;
+    flex-direction: column;
+
+    .inputAndLabel {
+      width: 100%;
+      display: flex;
+      margin: 2.3125rem 0 0;
+
+      flex-direction: column;
+
+      &.small {
+        @media screen and (min-width: $desktop) {
+          max-width: 14.3125rem;
+        }
+      }
+
+      &.big {
+        flex: 1;
+      }
+
+      label {
+        display: block;
+      }
+
+      input {
+        background-color: transparent;
+        border: 1px solid $white;
+        border-radius: 5px;
+        padding: 0.75rem 0.875rem;
+        margin-top: 0.5rem;
+      }
+
+      .inputFile {
+        position: relative;
+        border: 0;
+
+        &::before {
+          content: url('../../assets/UploadSimple.svg') '  Selecione imagem';
+          cursor: pointer;
+          background-color: $gray-900;
+          z-index: 9999;
+          text-align: center;
+
+          position: absolute;
+          width: 100%;
+          top: 0;
+          left: 0;
+          border: 1px solid $white;
+
+          border-radius: 5px;
+          padding: 0.625rem 0.875rem;
+        }
+      }
+    }
+
+    textarea {
+      background-color: transparent;
+      border: 1px solid $white;
+      border-radius: 5px;
+      padding: 0.75rem 0.875rem;
+
+      width: 100%;
+      margin-top: 8px;
+      resize: none;
+
+      height: 10.75rem;
+    }
+
+    label,
+    .label {
+      font-size: 1rem;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .ingredientsLabel {
+      font-size: 0.675rem;
+    }
+
+    .ingredientsWrapper {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .split {
+      display: flex;
+      width: 100%;
+
+      flex-wrap: wrap;
+
+      @media screen and (min-width: $desktop) {
+        gap: 1.0625rem;
+      }
+    }
+
+    button {
+      width: min(22.3125rem, 80vw);
+      flex: 1;
+
+      border: 1px solid $white;
+      background-color: rgba(255, 255, 255, 0.05);
+      color: $white;
+
+      font-weight: 500;
+
+      padding: 0.75rem 0;
+      border-radius: 5px;
+
+      margin-top: 0.875rem;
+      align-self: center;
+
+      &:hover {
+        background-color: $blue-900;
+      }
+
+      @media screen and (min-width: $desktop) {
+        align-self: flex-end;
+      }
+    }
+  }
+}

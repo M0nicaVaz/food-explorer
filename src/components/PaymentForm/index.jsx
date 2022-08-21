@@ -3,7 +3,7 @@ import styles from './paymentform.module.scss';
 
 export function PaymentForm() {
   return (
-    <form>
+    <form className={styles.paymentForm}>
       <label htmlFor="card">Número do Cartão</label>
       <input type="number" id="card" placeholder="0000 0000 0000 0000" />
 
