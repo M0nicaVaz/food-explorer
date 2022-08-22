@@ -2,11 +2,8 @@ import { CreditCard } from 'phosphor-react';
 import { useState } from 'react';
 import Pix from '../../assets/pix.svg';
 import qrCode from '../../assets/qrCode.svg';
-import { Footer } from '../../components/Footer';
-import { Header } from '../../components/Header';
 import { OrderItem } from '../../components/OrderItem';
 import { PaymentForm } from '../../components/PaymentForm';
-import { Wrapper } from '../../components/Wrapper';
 import styles from './order.module.scss';
 
 export function Order() {
@@ -23,44 +20,39 @@ export function Order() {
   }
 
   return (
-    <Wrapper>
-      <Header />
+    <main className={styles.content}>
+      <div className={styles.order}>
+        <strong>Meu Pedido</strong>
 
-      <main className={styles.content}>
-        <div className={styles.order}>
-          <strong>Meu Pedido</strong>
+        <ul>
+          <OrderItem />
+          <OrderItem />
+          <OrderItem />
+          <OrderItem />
+        </ul>
 
-          <ul>
-            <OrderItem />
-            <OrderItem />
-            <OrderItem />
-            <OrderItem />
-          </ul>
+        <span className={styles.total}>Total: R$ 103,88</span>
+      </div>
 
-          <span className={styles.total}>Total: R$ 103,88</span>
-        </div>
+      <div className={styles.payment}>
+        <strong>Pagamento</strong>
 
-        <div className={styles.payment}>
-          <strong>Pagamento</strong>
-
-          <div className={styles.paymentBox}>
-            <div className={styles.btnWrapper}>
-              <button onClick={handlePix} disabled={pixSelected}>
-                <img src={Pix} />
-                PIX
-              </button>
-              <button onClick={handleCreditCard} disabled={cardSelected}>
-                <CreditCard size={24} />
-                Crédito
-              </button>
-            </div>
-            <div>
-              {paymentType === 'pix' ? <img src={qrCode} /> : <PaymentForm />}
-            </div>
+        <div className={styles.paymentBox}>
+          <div className={styles.btnWrapper}>
+            <button onClick={handlePix} disabled={pixSelected}>
+              <img src={Pix} />
+              PIX
+            </button>
+            <button onClick={handleCreditCard} disabled={cardSelected}>
+              <CreditCard size={24} />
+              Crédito
+            </button>
+          </div>
+          <div>
+            {paymentType === 'pix' ? <img src={qrCode} /> : <PaymentForm />}
           </div>
         </div>
-      </main>
-      <Footer />
-    </Wrapper>
+      </div>
+    </main>
   );
 }
