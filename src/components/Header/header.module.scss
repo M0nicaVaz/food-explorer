@@ -22,6 +22,11 @@
     background-color: $blue-800;
     padding: 0.35rem 0.875rem;
     border-radius: 5px;
+    border: 2px solid transparent;
+
+    &:focus-within {
+      border: 2px solid $blue-100;
+    }
 
     input {
       width: min(25rem, 100%);
@@ -32,6 +37,10 @@
       padding: 0.5rem;
       font-size: inherit;
       font-family: inherit;
+
+      &:focus {
+        box-shadow: none;
+      }
     }
   }
 
