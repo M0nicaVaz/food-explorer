@@ -28,7 +28,7 @@
   background: $blue-900;
   border-radius: 16px;
 
-  padding: 0 4rem;
+  padding: 2rem 4rem;
   height: 37.5rem;
 
   width: min(29.75rem, 90vw);
@@ -49,6 +49,10 @@
     padding: 12px;
     background: inherit;
     border: 0.0625rem solid $white;
+
+    &:invalid {
+      border-color: $red-500;
+    }
   }
 
   label {
@@ -57,7 +61,7 @@
     margin-bottom: 8px;
   }
 
-  button {
+  button[type='submit'] {
     width: 100%;
     margin: 12px 0;
     border-radius: 0.5rem;
@@ -66,5 +70,19 @@
     color: $white;
     border: 0;
     cursor: pointer;
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.7;
+
+      &:hover {
+        filter: none;
+      }
+    }
   }
+}
+
+.error {
+  color: $red-400;
+  font-size: 0.875rem;
 }
