@@ -1,35 +1,40 @@
 import { Heart } from 'phosphor-react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import spaguetti from '../../assets/Dishes/Mask-group-2.png';
+import { CartContext } from '../../hooks/useCart';
 import { Stepper } from '../Stepper';
 
 import styles from './card.module.scss';
 
-export function Card({ dish, rest }) {
+export function Card({ data, ...rest }) {
+  const { addToCart } = useContext(CartContext);
+
+  function handleAddToCart() {
+    addToCart(data);
+  }
+
   return (
-    <article className={styles.wrapper} {...rest}>
+    <article className={styles.wrapper} data={data} {...rest}>
       <button className={styles.likeBtn}>
         <Heart size={26} />
       </button>
 
-      <img src={spaguetti} alt="" />
+      <img src={data.src} alt="" />
 
-      <Link to="/details">
-        <strong className={styles.title}>
-          {'Spaguetti Gambe' || dish.name}
-        </strong>
+      <Link to={`/details/${data.id}`}>
+        <strong className={styles.title}>{data.title}</strong>
       </Link>
 
-      <span className={styles.subtitle}>
-        {'Massa fresca com camarões e pesto.' || dish.description}
-      </span>
+      <span className={styles.subtitle}>{data.description}</span>
 
-      <span className={styles.price}>R$ {'79,97' || dish.price}</span>
+      <span className={styles.price}>R$ {data.price}</span>
 
       <footer>
         <Stepper />
 
-        <button className={styles.addBtn}>incluir</button>
+        <button className={styles.addBtn} onClick={handleAddToCart}>
+          incluir
+        </button>
       </footer>
     </article>
   );

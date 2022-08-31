@@ -1,16 +1,35 @@
 import { CaretLeft, Receipt } from 'phosphor-react';
-import { useNavigate } from 'react-router-dom';
-import spaguetti from '../../assets/Dishes/Mask-group-2.png';
+import { useNavigate, useParams } from 'react-router-dom';
+import { items } from '../../utils/data';
+
+import { useContext } from 'react';
+import { CartContext } from '../../hooks/useCart';
 
 import { Ingredient } from '../../components/Ingredient';
 import { Stepper } from '../../components/Stepper';
 import styles from './details.module.scss';
 
-export function Details({ dish }) {
+export function Details() {
   const navigate = useNavigate();
+
+  const { addToCart } = useContext(CartContext);
+
+  // ---------- while no server ----------
+  const { id } = useParams();
+  const data = items.find((item) => item.id === Number(id));
+
+  function handleAddToCart(data) {
+    addToCart();
+  }
+
+  // --------------------------------------
 
   function handleGoBack() {
     navigate(-1);
+  }
+
+  function handleAddToCart() {
+    addToCart(data);
   }
 
   return (
@@ -21,29 +40,28 @@ export function Details({ dish }) {
       </button>
 
       <div className={styles.details}>
-        <img className={styles.mainImg} src={spaguetti} alt="" />
+        <img className={styles.mainImg} src={data.src} alt="" />
 
         <div className={styles.contentWrapper}>
-          <h1 className={styles.title}>Salada Ravanello</h1>
+          <h1 className={styles.title}>{data.title}</h1>
 
-          <span className={styles.subtitle}>
-            Rabanetes, folhas verdes e molho agridoce salpicados com gergelim.
-          </span>
+          <span className={styles.subtitle}>{data.description}</span>
 
-          <div className={styles.ingredients}>
-            <Ingredient />
-            <Ingredient />
-            <Ingredient />
-            <Ingredient />
-          </div>
+          {data.ingredients && (
+            <div className={styles.ingredients}>
+              {data.ingredients.map((ingredient) => (
+                <Ingredient data={ingredient} />
+              ))}
+            </div>
+          )}
 
           <footer>
-            <span className={styles.price}>R$ {'79,97' || dish.price}</span>
+            <span className={styles.price}>R$ {data.price}</span>
 
             <div className={styles.stepper}>
               <Stepper />
 
-              <button className={styles.addBtn}>
+              <button className={styles.addBtn} onClick={handleAddToCart}>
                 <Receipt />
                 incluir
               </button>

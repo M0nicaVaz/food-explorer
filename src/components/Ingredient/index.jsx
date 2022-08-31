@@ -1,11 +1,17 @@
 import lettuce from '../../assets/Ingredients/lettuce.png';
 import styles from './ingredient.module.scss';
 
-export function Ingredient({ title, src }) {
+import { Question } from 'phosphor-react';
+
+export function Ingredient({ data }) {
   return (
     <figure className={styles.wrapper}>
-      <img src={src || lettuce} alt={title} />
-      <figcaption>{title || 'alface'}</figcaption>
+      {data.src.lenght > 1 ? (
+        <img src={data.src} alt={data.title} />
+      ) : (
+        <Question size={32} />
+      )}
+      <figcaption>{data.title}</figcaption>
     </figure>
   );
 }

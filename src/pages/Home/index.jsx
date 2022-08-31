@@ -3,6 +3,7 @@ import heroSVG from '../../assets/hero.svg';
 import { Card } from '../../components/Card';
 import '../../styles/overrideCarousel.css';
 import styles from './home.module.scss';
+import { meals, desserts, drinks } from '../../utils/data';
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -32,10 +33,9 @@ export function Home() {
           pagination={false}
           className={styles.carousel}
         >
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {meals.map((meal) => (
+            <Card data={meal} key={meal.id} />
+          ))}
         </Carousel>
       </section>
 
@@ -47,10 +47,9 @@ export function Home() {
           pagination={false}
           className={styles.carousel}
         >
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {desserts.map((meal) => (
+            <Card data={meal} key={meal.id} />
+          ))}
         </Carousel>
       </section>
 
@@ -61,10 +60,9 @@ export function Home() {
           pagination={false}
           className={styles.carousel}
         >
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {drinks.map((meal) => (
+            <Card data={meal} key={meal.id} />
+          ))}
         </Carousel>
       </section>
     </main>
