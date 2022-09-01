@@ -1,15 +1,15 @@
 import spaghetti from '../../assets/Dishes/Mask-group-2.png';
 import styles from './orderitem.module.scss';
 
-export function OrderItem({ ...rest }) {
+export function OrderItem({ item, ...rest }) {
   return (
-    <li {...rest} className={styles.orderItem}>
+    <li className={styles.orderItem} {...rest}>
       <img src={spaghetti} alt={spaghetti} />
       <div>
         <div>
-          <span>1 x</span>
-          <span>Salada Radish</span>
-          <span className={styles.price}>R$ 25,97</span>
+          <span>{item.itemsAmount} x</span>
+          <span>{item.product.title} </span>
+          <span className={styles.price}> R$ {item.product.price} </span>
         </div>
         <button>Excluir</button>
       </div>
