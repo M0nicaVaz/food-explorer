@@ -12,15 +12,11 @@ export function CartContextProvider({ children }) {
 
   const { cart } = cartState;
 
-  function addToCart(data) {
+  function addToCart(data, product) {
     const item = {
-      id: data.id,
-      title: data.title,
-      description: data.description,
-      src: data.src,
-      price: data.price,
-      type: data.type,
-      ingredients: data.ingredients,
+      onCartId: new Date(),
+      itemsAmount: data.itemsAmount,
+      product: product,
     };
 
     dispatch(addToCartAction(item));

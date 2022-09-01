@@ -4,13 +4,31 @@ import { Link } from 'react-router-dom';
 import { CartContext } from '../../hooks/useCart';
 import { Stepper } from '../Stepper';
 
+import * as zod from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { FormProvider, useForm } from 'react-hook-form';
+
 import styles from './card.module.scss';
+
+const addToCartSchema = zod.object({
+  itemsAmount: zod.number().min(1).max(99),
+});
 
 export function Card({ data, ...rest }) {
   const { addToCart } = useContext(CartContext);
 
-  function handleAddToCart() {
-    addToCart(data);
+  const addToCartForm = useForm({
+    resolver: zodResolver(addToCartSchema),
+    defaultValues: {
+      itemsAmount: 0,
+    },
+  });
+
+  const { handleSubmit, reset } = addToCartForm;
+
+  function handleAddToCart(itemsAmount) {
+    addToCart(itemsAmount, data);
+    reset();
   }
 
   return (
@@ -29,13 +47,15 @@ export function Card({ data, ...rest }) {
 
       <span className={styles.price}>R$ {data.price}</span>
 
-      <footer>
-        <Stepper />
+      <form onSubmit={handleSubmit(handleAddToCart)}>
+        <FormProvider {...addToCartForm}>
+          <Stepper />
+        </FormProvider>
 
-        <button className={styles.addBtn} onClick={handleAddToCart}>
+        <button type="submit" className={styles.addBtn}>
           incluir
         </button>
-      </footer>
+      </form>
     </article>
   );
 }

@@ -14,6 +14,8 @@ export function Header() {
   const { cart } = useContext(CartContext);
 
   useEffect(() => {
+    console.log(cart);
+
     setAmountOfItemsOnCart(cart.length);
   }, [cart]);
 

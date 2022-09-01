@@ -20,10 +20,24 @@
     }
   }
 
-  span {
+  input {
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
     font-size: 1.25rem;
     margin: 0 1rem;
+
+    background-color: transparent;
+    border: none;
+    width: 2rem;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &:read-only {
+      box-shadow: none;
+    }
   }
 }
