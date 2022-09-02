@@ -9,14 +9,17 @@ import { useContext } from 'react';
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [amountOfItemsOnCart, setAmountOfItemsOnCart] = useState(0);
+  const [amountOfItemsInCart, setAmountOfItemsInCart] = useState(0);
 
   const { cart } = useContext(CartContext);
 
   useEffect(() => {
-    console.log(cart);
+    const itemsInCart = cart.map((item) => item.itemsAmount);
 
-    setAmountOfItemsOnCart(cart.length);
+    const getTotalAmountOfItems = (total, num) => total + num;
+    const total = itemsInCart.reduce(getTotalAmountOfItems, 0);
+
+    setAmountOfItemsInCart(total);
   }, [cart]);
 
   return (
@@ -56,13 +59,13 @@ export function Header() {
 
         <Link to="/order" className={styles.orderBtn}>
           <Receipt size={22} />
-          Meu pedido {`(${amountOfItemsOnCart})`}
+          Meu pedido {`(${amountOfItemsInCart})`}
         </Link>
       </div>
 
       <Link to="/order" className={`${styles.orderBtn} ${styles.desktopOnly}`}>
         <Receipt size={22} />
-        Meu pedido {`(${amountOfItemsOnCart})`}
+        Meu pedido {`(${amountOfItemsInCart})`}
       </Link>
     </header>
   );

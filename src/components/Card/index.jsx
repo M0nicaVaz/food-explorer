@@ -19,9 +19,6 @@ export function Card({ data, ...rest }) {
 
   const addToCartForm = useForm({
     resolver: zodResolver(addToCartSchema),
-    defaultValues: {
-      itemsAmount: 0,
-    },
   });
 
   const { handleSubmit, reset } = addToCartForm;

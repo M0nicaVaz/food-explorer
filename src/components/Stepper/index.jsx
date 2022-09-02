@@ -1,14 +1,16 @@
 import { Minus, Plus } from 'phosphor-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './stepper.module.scss';
 
 import { useFormContext } from 'react-hook-form';
+import { useEffect } from 'react';
 
 export function Stepper() {
+  const { register, setValue } = useFormContext();
   const [amount, setAmount] = useState(1);
-  const { register, watch } = useFormContext();
 
-  const reachedMinimalAmount = amount === 1;
+  const reachedMinAmount = amount === 1;
+  const reachedMaxAmount = amount === 99;
   const formattedAmount = String(amount).padStart(2, '0');
 
   function handleRemove() {
@@ -19,13 +21,17 @@ export function Stepper() {
     setAmount((state) => state + 1);
   }
 
+  useEffect(() => {
+    setValue('itemsAmount', amount, { shouldValidate: true });
+  }, [amount]);
+
   return (
     <div className={styles.stepper}>
       <button
         type="button"
         className={styles.stepperBtn}
         onClick={handleRemove}
-        disabled={reachedMinimalAmount}
+        disabled={reachedMinAmount}
       >
         <Minus size={18} />
       </button>
@@ -35,11 +41,16 @@ export function Stepper() {
         min={1}
         max={99}
         readOnly={true}
-        value={amount}
+        value={formattedAmount}
         {...register('itemsAmount', { valueAsNumber: true })}
       />
 
-      <button type="button" className={styles.stepperBtn} onClick={handleAdd}>
+      <button
+        type="button"
+        className={styles.stepperBtn}
+        onClick={handleAdd}
+        disabled={reachedMaxAmount}
+      >
         <Plus size={18} />
       </button>
     </div>

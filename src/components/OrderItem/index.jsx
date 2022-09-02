@@ -4,7 +4,7 @@ import styles from './orderitem.module.scss';
 export function OrderItem({ item, ...rest }) {
   return (
     <li className={styles.orderItem} {...rest}>
-      <img src={spaghetti} alt={spaghetti} />
+      <img src={item.product.src} alt={item.product.title} />
       <div>
         <div>
           <span>{item.itemsAmount} x</span>

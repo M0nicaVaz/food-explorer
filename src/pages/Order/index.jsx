@@ -10,10 +10,10 @@ import { CartContext } from '../../hooks/useCart';
 export function Order() {
   const [paymentType, setPaymentType] = useState('pix');
   const [totalPrice, setTotalPrice] = useState(0);
+  const { cart } = useContext(CartContext);
 
   const pixSelected = paymentType === 'pix';
   const cardSelected = paymentType === 'card';
-  const { cart } = useContext(CartContext);
 
   function calculateTotalPrice() {
     const prices = cart.map((item) => item.itemsAmount * item.product.price);
