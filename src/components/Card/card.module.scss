@@ -86,7 +86,7 @@
       margin: 0 1rem;
     }
 
-    .addBtn {
+    button[type='submit'] {
       background-color: $red-500;
       color: $white;
       border-radius: 8px;

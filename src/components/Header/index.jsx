@@ -15,10 +15,8 @@ export function Header() {
 
   useEffect(() => {
     const itemsInCart = cart.map((item) => item.itemsAmount);
-
     const getTotalAmountOfItems = (total, num) => total + num;
     const total = itemsInCart.reduce(getTotalAmountOfItems, 0);
-
     setAmountOfItemsInCart(total);
   }, [cart]);
 

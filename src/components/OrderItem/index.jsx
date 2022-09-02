@@ -1,7 +1,14 @@
-import spaghetti from '../../assets/Dishes/Mask-group-2.png';
 import styles from './orderitem.module.scss';
+import { useContext } from 'react';
+import { CartContext } from '../../hooks/useCart';
 
 export function OrderItem({ item, ...rest }) {
+  const { removeItemFromCart } = useContext(CartContext);
+
+  function handleRemoveItem() {
+    removeItemFromCart(item.product.id);
+  }
+
   return (
     <li className={styles.orderItem} {...rest}>
       <img src={item.product.src} alt={item.product.title} />
@@ -11,7 +18,7 @@ export function OrderItem({ item, ...rest }) {
           <span>{item.product.title} </span>
           <span className={styles.price}> R$ {item.product.price} </span>
         </div>
-        <button>Excluir</button>
+        <button onClick={handleRemoveItem}>Excluir</button>
       </div>
     </li>
   );

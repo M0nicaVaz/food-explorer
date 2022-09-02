@@ -7,9 +7,11 @@ export function addToCartAction(item) {
   };
 }
 
-export function removeFromCartAction() {
+export function updateCart(updatedCart) {
   return {
-    type: 'REMOVE_FROM_CART',
-    payload: {},
+    type: 'UPDATE_CART',
+    payload: {
+      updatedCart,
+    },
   };
 }

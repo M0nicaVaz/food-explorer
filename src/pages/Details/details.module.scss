@@ -27,7 +27,7 @@
     gap: 2.5rem;
     padding: 2rem;
 
-    .addBtn {
+    button[type='submit'] {
       background-color: $red-500;
       color: $white;
       border: none;

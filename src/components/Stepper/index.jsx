@@ -11,7 +11,6 @@ export function Stepper() {
 
   const reachedMinAmount = amount === 1;
   const reachedMaxAmount = amount === 99;
-  const formattedAmount = String(amount).padStart(2, '0');
 
   function handleRemove() {
     setAmount((state) => state - 1);
@@ -21,9 +20,7 @@ export function Stepper() {
     setAmount((state) => state + 1);
   }
 
-  useEffect(() => {
-    setValue('itemsAmount', amount, { shouldValidate: true });
-  }, [amount]);
+  setValue('itemsAmount', amount, { shouldValidate: true });
 
   return (
     <div className={styles.stepper}>
@@ -41,7 +38,6 @@ export function Stepper() {
         min={1}
         max={99}
         readOnly={true}
-        value={formattedAmount}
         {...register('itemsAmount', { valueAsNumber: true })}
       />
 

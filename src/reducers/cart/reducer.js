@@ -7,9 +7,10 @@ export function cartReducer(state, action) {
         draft.cart.push(action.payload.item);
       });
 
-    case 'REMOVE_FROM_CART': {
-      return state;
-    }
+    case 'UPDATE_CART':
+      return produce(state, (draft) => {
+        draft.cart = action.payload.updatedCart;
+      });
 
     default:
       return state;

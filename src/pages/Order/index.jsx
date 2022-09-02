@@ -43,11 +43,14 @@ export function Order() {
 
         <ul>
           {cart.map((item) => (
-            <OrderItem item={item} key={item.onCartId} />
+            <OrderItem
+              item={item}
+              key={`${String(new Date().getTime())}+${Math.random() * 100}`}
+            />
           ))}
         </ul>
 
-        <span className={styles.total}>Total: R$ {totalPrice} </span>
+        <span className={styles.total}>Total: R$ {totalPrice.toFixed(2)} </span>
       </div>
 
       <div className={styles.payment}>
