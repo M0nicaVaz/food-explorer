@@ -18,16 +18,6 @@
     border: none;
   }
 
-  .likeBtn {
-    background: none;
-    color: $white;
-    align-self: flex-end;
-
-    &:hover {
-      color: $red-500;
-    }
-  }
-
   img {
     width: clamp(8rem, 8rem + 5vw, 11rem);
   }

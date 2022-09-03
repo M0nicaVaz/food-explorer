@@ -1,17 +1,27 @@
-import { List, MagnifyingGlass, Receipt, SignOut, X } from 'phosphor-react';
-import { useEffect, useState } from 'react';
+import {
+  List,
+  MagnifyingGlass,
+  Receipt,
+  SignOut,
+  X,
+  ShoppingCartSimple,
+} from 'phosphor-react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Logo } from '../../components/Logo';
 import styles from './header.module.scss';
 
 import { CartContext } from '../../hooks/useCart';
 import { useContext } from 'react';
+import { useOnClickOutside } from '../../hooks/useOnClickOutside';
 
 export function Header() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { cart } = useContext(CartContext);
   const [amountOfItemsInCart, setAmountOfItemsInCart] = useState(0);
 
-  const { cart } = useContext(CartContext);
+  const ref = useRef();
+  const [isOpen, setIsOpen] = useState(false);
+  useOnClickOutside(ref, () => setIsOpen(false));
 
   useEffect(() => {
     const itemsInCart = cart.map((item) => item.itemsAmount);
@@ -30,11 +40,12 @@ export function Header() {
         <button
           title="Menu"
           className={styles.btnMenu}
+          data-count={amountOfItemsInCart}
           onClick={() => {
             setIsOpen(!isOpen);
           }}
         >
-          {isOpen ? <X size={24} /> : <List size={24} />}
+          {isOpen ? <X size={24} /> : <ShoppingCartSimple size={24} />}
         </button>
 
         <button title="Sair" className={styles.btnLogOut}>
@@ -43,7 +54,7 @@ export function Header() {
       </div>
 
       <Link to="/archive" className={styles.desktopOnly}>
-        <span>Meus favoritos</span>
+        <span>Histórico de pedidos</span>
       </Link>
 
       <div className={styles.search}>
@@ -52,8 +63,12 @@ export function Header() {
         <input type="text" id="search" placeholder="Busque opções de pratos" />
       </div>
 
-      <div className={`${styles.menu} ${isOpen && styles.open}`}>
-        <Link to="/archive">Meus favoritos</Link>
+      <div
+        className={`${styles.menu} ${isOpen && styles.open}`}
+        ref={ref}
+        onClick={() => setIsOpen(false)}
+      >
+        <Link to="/archive">Histórico de pedidos</Link>
 
         <Link to="/order" className={styles.orderBtn}>
           <Receipt size={22} />

@@ -61,8 +61,21 @@
     .btnMenu {
       opacity: 1;
       visibility: visible;
+      position: relative;
 
       &:hover {
+        color: $blue-100;
+      }
+
+      &::after {
+        content: attr(data-count);
+        display: block;
+        position: absolute;
+        top: -10px;
+        left: 16px;
+
+        font-size: 0.8rem;
+
         color: $blue-100;
       }
     }
@@ -170,6 +183,11 @@
     width: 0;
     opacity: 0;
     visibility: hidden;
+
+    &::after {
+      opacity: 0;
+      visibility: hidden;
+    }
 
     & svg {
       opacity: 0;

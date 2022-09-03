@@ -1,6 +1,10 @@
 import styles from './archive.module.scss';
+import { useContext } from 'react';
+import { CartContext } from '../../hooks/useCart';
 
 export function Archive() {
+  const { historyList } = useContext(CartContext);
+
   return (
     <main className={styles.content}>
       <h1 className={styles.title}>Pedidos</h1>
@@ -17,54 +21,20 @@ export function Archive() {
           </thead>
 
           <tbody>
-            <tr>
-              <td>
-                <div className={`${styles.dot} ${styles.red}`} />
-                Pendente
-              </td>
-              <td>00000004</td>
-              <td>
-                1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x
-                Suco de Maracujá
-              </td>
-              <td> 20/05 às 18h00</td>
-            </tr>
-            <tr>
-              <td>
-                <div className={`${styles.dot} ${styles.yellow}`} />
-                Preparando
-              </td>
-              <td>00000004</td>
-              <td>
-                1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x
-                Suco de Maracujá
-              </td>
-              <td> 20/05 às 18h00</td>
-            </tr>
-            <tr>
-              <td>
-                <div className={`${styles.dot} ${styles.green}`} />
-                Entregue
-              </td>
-              <td>00000004</td>
-              <td>
-                1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x
-                Suco de Maracujá
-              </td>
-              <td> 20/05 às 18h00</td>
-            </tr>
-            <tr>
-              <td>
-                <div className={`${styles.dot} ${styles.green}`} />
-                Entregue
-              </td>
-              <td>00000004</td>
-              <td>
-                1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x
-                Suco de Maracujá
-              </td>
-              <td> 20/05 às 18h00</td>
-            </tr>
+            {historyList &&
+              historyList.map((order, index) => (
+                <tr key={`${order.orderTime}+${Math.random() * 100}`}>
+                  <td>
+                    <div className={`${styles.dot} ${styles.red}`} />
+                    Pendente
+                  </td>
+                  <td>{String(index + 1).padStart(5, '0')}</td>
+                  <td>
+                    <span>{order.product} </span>
+                  </td>
+                  <td> {order.orderTime} </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

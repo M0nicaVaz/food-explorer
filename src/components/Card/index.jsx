@@ -1,4 +1,5 @@
-import { Heart } from 'phosphor-react';
+// import { Heart } from 'phosphor-react';
+
 import { Link } from 'react-router-dom';
 import { Form } from '../Form';
 
@@ -7,10 +8,6 @@ import styles from './card.module.scss';
 export function Card({ data, ...rest }) {
   return (
     <article className={styles.wrapper} data={data} {...rest}>
-      <button className={styles.likeBtn}>
-        <Heart size={26} />
-      </button>
-
       <img src={data.src} alt="" />
 
       <Link to={`/details/${data.id}`}>
