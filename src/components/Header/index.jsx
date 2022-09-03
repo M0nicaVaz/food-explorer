@@ -24,10 +24,12 @@ export function Header() {
   useOnClickOutside(ref, () => setIsOpen(false));
 
   useEffect(() => {
-    const itemsInCart = cart.map((item) => item.itemsAmount);
-    const getTotalAmountOfItems = (total, num) => total + num;
-    const total = itemsInCart.reduce(getTotalAmountOfItems, 0);
-    setAmountOfItemsInCart(total);
+    if (cart) {
+      const itemsInCart = cart.map((item) => item.itemsAmount);
+      const getTotalAmountOfItems = (total, num) => total + num;
+      const total = itemsInCart.reduce(getTotalAmountOfItems, 0);
+      setAmountOfItemsInCart(total);
+    }
   }, [cart]);
 
   return (

@@ -33,7 +33,9 @@ export function Order() {
   }
 
   useEffect(() => {
-    calculateTotalPrice();
+    if (cart) {
+      calculateTotalPrice();
+    }
   }, [cart]);
 
   return (
@@ -42,12 +44,13 @@ export function Order() {
         <strong>Meu Pedido</strong>
 
         <ul>
-          {cart.map((item) => (
-            <OrderItem
-              item={item}
-              key={`${String(new Date().getTime())}+${Math.random() * 100}`}
-            />
-          ))}
+          {cart &&
+            cart.map((item) => (
+              <OrderItem
+                item={item}
+                key={`${String(new Date().getTime())}+${Math.random() * 100}`}
+              />
+            ))}
         </ul>
 
         <span className={styles.total}>Total: R$ {totalPrice.toFixed(2)} </span>
