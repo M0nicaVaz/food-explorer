@@ -39,26 +39,35 @@ export function CartContextProvider({ children }) {
   const { cart } = cartState;
 
   function addToCart(data, product) {
-    const itemAlreadyInCart = cart.find(
-      (item) => item.product.id === product.id
-    );
+    if (cart.length > 0) {
+      const itemAlreadyInCart = cart.find(
+        (item) => item.product.id === product.id
+      );
 
-    const amount = itemAlreadyInCart
-      ? data.itemsAmount + itemAlreadyInCart.itemsAmount
-      : data.itemsAmount;
+      const amount = itemAlreadyInCart
+        ? data.itemsAmount + itemAlreadyInCart.itemsAmount
+        : data.itemsAmount;
 
-    const item = {
-      onCartId: new Date(),
-      itemsAmount: amount,
-      product: product,
-    };
+      const item = {
+        onCartId: new Date(),
+        itemsAmount: amount,
+        product: product,
+      };
 
-    if (itemAlreadyInCart) {
-      const updatedCart = cart.filter((item) => item.product.id !== product.id);
+      if (itemAlreadyInCart) {
+        const updatedCart = cart.filter(
+          (item) => item.product.id !== product.id
+        );
 
-      dispatch(updateCart(updatedCart));
-      dispatch(addToCartAction(item));
+        dispatch(updateCart(updatedCart));
+        dispatch(addToCartAction(item));
+      }
     } else {
+      const item = {
+        onCartId: new Date(),
+        itemsAmount: data.itemsAmount,
+        product: product,
+      };
       dispatch(addToCartAction(item));
     }
   }
