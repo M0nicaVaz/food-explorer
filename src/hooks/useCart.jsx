@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { createContext, useReducer, useState } from 'react';
+import { toast } from 'react-toastify';
 import { addToCartAction, updateCart } from '../reducers/cart/actions';
 import { cartReducer } from '../reducers/cart/reducer';
 
@@ -57,16 +58,22 @@ export function CartContextProvider({ children }) {
   }
 
   function processOrder(order) {
-    const formatted = order.product.map(
-      (product) => `${product.amount}x ${product.title}. `
-    );
+    if (order.product.length > 0) {
+      const formatted = order.product.map(
+        (product) => `${product.amount}x ${product.title}. `
+      );
 
-    order.product = formatted;
-    setHistoryList((state) => [...state, order]);
+      order.product = formatted;
+      setHistoryList((state) => [...state, order]);
 
-    const updatedCart = [];
+      const updatedCart = [];
 
-    dispatch(updateCart(updatedCart));
+      dispatch(updateCart(updatedCart));
+      toast.success('Acompanhe seu pedido no histórico 😊');
+    } else {
+      toast.warning('Seu carrinho está vazio 😥');
+      return;
+    }
   }
 
   useEffect(() => {
