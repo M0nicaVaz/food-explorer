@@ -5,22 +5,23 @@ import { cartReducer } from '../reducers/cart/reducer';
 
 export const CartContext = createContext({});
 
-const initialCartState =
-  JSON.parse(localStorage.getItem('@food-explorer:cart')) || [];
+const initialHistoryState = () => {
+  const historyStored = localStorage.getItem('@food-explorer:history');
 
-const getHistoryFromLocalStorage = () => {
-  const historyStoraged = localStorage.getItem('@food-explorer:history');
-
-  if (historyStoraged) {
-    return JSON.parse(historyStoraged);
+  if (historyStored) {
+    return JSON.parse(historyStored);
+  } else {
+    return [];
   }
 };
 
 export function CartContextProvider({ children }) {
-  const [cartState, dispatch] = useReducer(cartReducer, initialCartState);
+  const [cartState, dispatch] = useReducer(cartReducer, {
+    cart: [],
+  });
   const { cart } = cartState;
 
-  const [historyList, setHistoryList] = useState(getHistoryFromLocalStorage);
+  const [historyList, setHistoryList] = useState(initialHistoryState);
   const [formattedList, setFormattedList] = useState([]);
 
   function addToCart(data, product) {
@@ -69,9 +70,8 @@ export function CartContextProvider({ children }) {
   }
 
   useEffect(() => {
-    localStorage.setItem('@food-explorer:cart', JSON.stringify(cartState));
     localStorage.setItem('@food-explorer:history', JSON.stringify(historyList));
-  }, [cartState, historyList]);
+  }, [historyList]);
 
   return (
     <CartContext.Provider
