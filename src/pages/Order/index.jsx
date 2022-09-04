@@ -8,7 +8,7 @@ import styles from './order.module.scss';
 import { CartContext } from '../../hooks/useCart';
 
 export function Order() {
-  const [paymentType, setPaymentType] = useState('pix');
+  const [paymentType, setPaymentType] = useState('card');
   const [totalPrice, setTotalPrice] = useState(0);
   const { cart } = useContext(CartContext);
 

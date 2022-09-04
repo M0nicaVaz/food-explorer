@@ -1,6 +1,5 @@
 import { Receipt } from 'phosphor-react';
 import { useContext } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
 import { CartContext } from '../../hooks/useCart';
 import styles from './paymentform.module.scss';
 

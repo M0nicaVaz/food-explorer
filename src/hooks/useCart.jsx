@@ -69,9 +69,9 @@ export function CartContextProvider({ children }) {
       const updatedCart = [];
 
       dispatch(updateCart(updatedCart));
-      toast.success('Acompanhe seu pedido no histórico 😊');
+      toast.success('Acompanhe seu pedido no histórico!');
     } else {
-      toast.warning('Seu carrinho está vazio 😥');
+      toast.warning('Seu pedido está vazio!');
       return;
     }
   }

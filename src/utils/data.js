@@ -1,4 +1,9 @@
-import salad from '../assets/Dishes/Mask group-3.png';
+import molla from '../assets/Dishes/Mask group-3.png';
+import ravanello from '../assets/Dishes/Mask group.png';
+import spaghetti from '../assets/Dishes/Mask-group-2.png';
+import pie from '../assets/Dishes/Mask group-4.png';
+import peachy from '../assets/Dishes/Mask group-5.png';
+import macaroons from '../assets/Dishes/Mask group-6.png';
 import toast from '../assets/Dishes/Mask group-1.png';
 import coffee from '../assets/Dishes/Mask group-9.png';
 import cake from '../assets/Dishes/Mask group-7.png';
@@ -12,7 +17,7 @@ export const items = [
     title: 'Salada Ravanello',
     description:
       'Rabanetes, folhas verdes e molho agridoce salpicados com gergelim',
-    src: salad,
+    src: ravanello,
     price: 49.97,
     type: 'meal',
     ingredients: [
@@ -47,11 +52,10 @@ export const items = [
   },
   {
     id: 3,
-    title: 'Torradas de Parma',
-    description:
-      'Presunto de parma e rúcula em um pão com fermentação natural.',
-    src: toast,
-    price: 26.97,
+    title: 'Salada Molla',
+    description: 'Tomates, coentro, pepino, cebola roxa. Frescos e temperados.',
+    src: molla,
+    price: 19.97,
     type: 'meal',
 
     ingredients: [
@@ -71,9 +75,9 @@ export const items = [
   },
   {
     id: 4,
-    title: 'Bolo de Damasco',
-    description: 'Damascos frescos em uma massa sem glúten.',
-    src: cake,
+    title: 'Prugna Pie',
+    description: 'Torta de ameixa com massa amanteigada, polvilho em açúcar.',
+    src: pie,
     price: 19.97,
     type: 'dessert',
 
@@ -90,10 +94,10 @@ export const items = [
   },
   {
     id: 5,
-    title: 'Bolo de Damasco',
-    description: 'Damascos frescos em uma massa sem glúten.',
-    src: cake,
-    price: 19.97,
+    title: 'Peachy pastrie',
+    description: 'Torta de ameixa com massa amanteigada, polvilho em açúcar.',
+    src: peachy,
+    price: 32.97,
     type: 'dessert',
     ingredients: [
       {
@@ -108,10 +112,10 @@ export const items = [
   },
   {
     id: 6,
-    title: 'Bolo de Damasco',
-    description: 'Damascos frescos em uma massa sem glúten.',
-    src: cake,
-    price: 19.97,
+    title: 'Macaroons',
+    description: 'DFarinha de amêndoas, manteiga, claras e açúcar.',
+    src: macaroons,
+    price: 79.97,
     type: 'dessert',
     ingredients: [
       {
@@ -192,6 +196,46 @@ export const items = [
       },
       {
         title: 'limão',
+        src: '',
+      },
+    ],
+  },
+  {
+    id: 11,
+    title: 'Spaguetti Gambe',
+    description: 'Massa fresca com camarões e pesto.',
+    src: spaghetti,
+    price: 79.97,
+    type: 'meal',
+    ingredients: [
+      {
+        title: 'canela',
+        src: '',
+      },
+      {
+        title: 'amiz',
+        src: '',
+      },
+      {
+        title: 'limão',
+        src: '',
+      },
+    ],
+  },
+  {
+    id: 12,
+    title: 'Bolo de Damasco',
+    description: 'Farinha de amêndoas, manteiga, claras e açúcar.',
+    src: cake,
+    price: 79.97,
+    type: 'dessert',
+    ingredients: [
+      {
+        title: 'Damasco',
+        src: '',
+      },
+      {
+        title: 'farinha',
         src: '',
       },
     ],

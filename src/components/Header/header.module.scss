@@ -51,6 +51,15 @@
     align-items: flex-end;
     justify-content: flex-end;
 
+    span {
+      cursor: pointer;
+      transition: 200ms color;
+      padding-bottom: 2px;
+      &:hover {
+        color: $blue-100;
+      }
+    }
+
     > button {
       background: none;
       border: none;

@@ -39,16 +39,22 @@ export function Header() {
       </Link>
 
       <div className={styles.buttons}>
-        <button
-          title="Menu"
-          className={styles.btnMenu}
-          data-count={amountOfItemsInCart}
-          onClick={() => {
-            setIsOpen(!isOpen);
-          }}
-        >
-          {isOpen ? <X size={24} /> : <ShoppingCartSimple size={24} />}
-        </button>
+        {isOpen ? (
+          <span>
+            <X size={24} />
+          </span>
+        ) : (
+          <button
+            title="Menu"
+            className={styles.btnMenu}
+            data-count={amountOfItemsInCart}
+            onClick={() => {
+              setIsOpen(true);
+            }}
+          >
+            <ShoppingCartSimple size={24} />
+          </button>
+        )}
 
         <button title="Sair" className={styles.btnLogOut}>
           <SignOut size={24} />

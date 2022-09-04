@@ -8,7 +8,7 @@ import { meals, desserts, drinks } from '../../utils/data';
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
-  { width: 768, itemsToShow: 3 },
+  { width: 910, itemsToShow: 3 },
   { width: 1200, itemsToShow: 4 },
 ];
 
@@ -28,11 +28,7 @@ export function Home() {
       <section>
         <strong className={styles.sectionTitle}> Pratos principais</strong>
 
-        <Carousel
-          breakPoints={breakPoints}
-          pagination={false}
-          className={styles.carousel}
-        >
+        <Carousel breakPoints={breakPoints} pagination={false}>
           {meals.map((meal) => (
             <Card data={meal} key={meal.id} />
           ))}
