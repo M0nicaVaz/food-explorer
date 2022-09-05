@@ -37,6 +37,10 @@
       margin: 0;
     }
 
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
     &:read-only {
       box-shadow: none;
     }
