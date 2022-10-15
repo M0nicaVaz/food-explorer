@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { createContext, useReducer, useState } from 'react';
 import { toast } from 'react-toastify';
 import { addToCartAction, updateCart } from '../reducers/cart/actions';
@@ -94,4 +94,8 @@ export function CartContextProvider({ children }) {
       {children}
     </CartContext.Provider>
   );
+}
+
+export function useCart() {
+  return useContext(CartContext);
 }
