@@ -1,11 +1,12 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { Logo } from '../../components/Logo';
-import styles from './signup.module.scss';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as zod from 'zod';
+
+import styles from './signup.module.scss';
+import { useAuth } from '../../context/useAuth';
 
 const formValidationSchema = zod.object({
   name: zod.string().min(1, 'Insira um nome'),
@@ -14,26 +15,24 @@ const formValidationSchema = zod.object({
 });
 
 export function SignUp() {
+  const { signUp } = useAuth();
+
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(formValidationSchema),
   });
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = handleSubmit(async (data) => {
+    const { email, password, name } = data;
+    signUp({ email, password, name });
+  });
 
-  const name = watch('name');
-  const email = watch('email');
-  const password = watch('password');
-  const isSubmitDisabled = !name || !email || !password;
   return (
-    <div className={styles.wrapper}>
-      <Logo />
-
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+    <>
+      <form className={styles.form} onSubmit={onSubmit}>
         <legend>Crie sua conta</legend>
         <div>
           <label htmlFor="name">Nome</label>
@@ -71,11 +70,9 @@ export function SignUp() {
             <span className={styles.error}>{errors.password?.message}</span>
           )}
         </div>
-        <button type="submit" disabled={isSubmitDisabled}>
-          Criar conta
-        </button>
-        <Link to="/">Já tenho uma conta</Link>
+        <button type="submit">Criar conta</button>
+        <Link to="/login">Já tenho uma conta</Link>
       </form>
-    </div>
+    </>
   );
 }

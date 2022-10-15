@@ -1,13 +1,35 @@
 import { Link } from 'react-router-dom';
-import { Logo } from '../../components/Logo';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as zod from 'zod';
+import { useAuth } from '../../context/useAuth';
+
 import styles from './signin.module.scss';
 
-export function SignIn() {
-  return (
-    <div className={styles.wrapper}>
-      <Logo />
+const formValidationSchema = zod.object({
+  email: zod.string().email({ message: 'Digite um email válido' }),
+  password: zod.string().min(6, { message: 'Digite uma senha maior' }),
+});
 
-      <form className={styles.form}>
+export function SignIn() {
+  const { signIn } = useAuth();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(formValidationSchema),
+  });
+
+  const onSubmit = handleSubmit(async (data) => {
+    const { email, password } = data;
+    signIn({ email, password });
+  });
+
+  return (
+    <>
+      <form className={styles.form} onSubmit={onSubmit}>
         <legend>Faça login</legend>
 
         <div>
@@ -16,7 +38,11 @@ export function SignIn() {
             type="email"
             id="email"
             placeholder="Exemplo: exemplo@exemplo.com.br"
+            {...register('email')}
           />
+          {errors.email?.message && (
+            <span className={styles.error}>{errors.email?.message}</span>
+          )}
         </div>
 
         <div>
@@ -25,12 +51,16 @@ export function SignIn() {
             type="password"
             id="password"
             placeholder="No mínimo 6 caracteres"
+            {...register('password')}
           />
+          {errors.password?.message && (
+            <span className={styles.error}>{errors.password?.message}</span>
+          )}
         </div>
 
         <button type="submit">Criar conta</button>
         <Link to="/signup">Criar uma conta</Link>
       </form>
-    </div>
+    </>
   );
 }
