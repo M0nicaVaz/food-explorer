@@ -1,5 +1,4 @@
 import {
-  List,
   MagnifyingGlass,
   Receipt,
   SignOut,
@@ -11,16 +10,19 @@ import { Link } from 'react-router-dom';
 import { Logo } from '../../components/Logo';
 import styles from './header.module.scss';
 
-import { CartContext } from '../../hooks/useCart';
-import { useContext } from 'react';
+import { useCart } from '../../hooks/useCart';
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
+import { useAuth } from '../../context/useAuth';
 
 export function Header() {
-  const { cart } = useContext(CartContext);
+  const { user } = useAuth();
+  const [isOpen, setIsOpen] = useState(false);
   const [amountOfItemsInCart, setAmountOfItemsInCart] = useState(0);
 
+  const { signOut } = useAuth();
+  const { cart } = useCart();
+
   const ref = useRef();
-  const [isOpen, setIsOpen] = useState(false);
   useOnClickOutside(ref, () => setIsOpen(false));
 
   useEffect(() => {
@@ -56,12 +58,12 @@ export function Header() {
           </button>
         )}
 
-        <button title="Sair" className={styles.btnLogOut}>
+        <button title="Sair" className={styles.btnLogOut} onClick={signOut}>
           <SignOut size={24} />
         </button>
       </div>
 
-      <Link to="/archive" className={styles.desktopOnly}>
+      <Link to={user ? '/archive' : '/login'} className={styles.desktopOnly}>
         <span>Histórico de pedidos</span>
       </Link>
 

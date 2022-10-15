@@ -1,0 +1,25 @@
+.homeBtn {
+  color: $blue-100;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+}
+
+.wrapper {
+  max-width: 90rem;
+  min-height: 100vh;
+
+  margin: 2rem auto;
+  padding: 0 1rem;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  gap: 2rem;
+}
+
+@media (min-width: $desktop) {
+  .wrapper {
+    grid-template-columns: 1fr 29.75rem;
+  }
+}

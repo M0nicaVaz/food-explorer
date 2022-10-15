@@ -1,26 +1,35 @@
 import { Receipt } from 'phosphor-react';
-import { useContext } from 'react';
-import { CartContext } from '../../hooks/useCart';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/useAuth';
+import { useCart } from '../../hooks/useCart';
+
 import styles from './paymentform.module.scss';
 
 export function PaymentForm() {
-  const { cart, processOrder } = useContext(CartContext);
+  const { cart, processOrder } = useCart();
+  const { user } = useAuth();
+
+  const navigate = useNavigate();
 
   function handleOrder() {
-    let itemsFormatted = cart.map((item) => {
-      return {
-        amount: item.itemsAmount,
-        title: item.product.title,
-      };
-    });
-    const time = new Intl.DateTimeFormat('pt-BR', {
-      dateStyle: 'short',
-      timeStyle: 'short',
-    }).format(new Date());
+    if (user) {
+      const itemsFormatted = cart.map((item) => {
+        return {
+          amount: item.itemsAmount,
+          title: item.product.title,
+        };
+      });
+      const time = new Intl.DateTimeFormat('pt-BR', {
+        dateStyle: 'short',
+        timeStyle: 'short',
+      }).format(new Date());
 
-    const newOrder = { product: [...itemsFormatted], orderTime: time };
+      const newOrder = { product: [...itemsFormatted], orderTime: time };
 
-    processOrder(newOrder);
+      processOrder(newOrder);
+    } else {
+      navigate('/login');
+    }
   }
 
   return (
