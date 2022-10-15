@@ -1,9 +1,8 @@
 import styles from './archive.module.scss';
-import { useContext } from 'react';
-import { CartContext } from '../../hooks/useCart';
+import { useCart } from '../../hooks/useCart';
 
 export function Archive() {
-  const { historyList } = useContext(CartContext);
+  const { historyList } = useCart();
 
   return (
     <main className={styles.content}>

@@ -1,16 +1,16 @@
 import { CreditCard } from 'phosphor-react';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Pix from '../../assets/pix.svg';
 import qrCode from '../../assets/qrCode.svg';
 import { OrderItem } from '../../components/OrderItem';
 import { PaymentForm } from '../../components/PaymentForm';
 import styles from './order.module.scss';
-import { CartContext } from '../../hooks/useCart';
+import { useCart } from '../../hooks/useCart';
 
 export function Order() {
   const [paymentType, setPaymentType] = useState('card');
   const [totalPrice, setTotalPrice] = useState(0);
-  const { cart } = useContext(CartContext);
+  const { cart } = useCart();
 
   const pixSelected = paymentType === 'pix';
   const cardSelected = paymentType === 'card';
