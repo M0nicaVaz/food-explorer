@@ -1,21 +1,21 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import * as zod from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import * as zod from 'zod'
 
-import styles from './signup.module.scss';
-import { useAuth } from '../../context/useAuth';
+import styles from './signup.module.scss'
+import { useAuth } from '../../context/useAuth'
 
 const formValidationSchema = zod.object({
   name: zod.string().min(1, 'Insira um nome'),
   email: zod.string().email({ message: 'Digite um email válido' }),
   password: zod.string().min(6, { message: 'Digite uma senha maior' }),
-});
+})
 
 export function SignUp() {
-  const { signUp } = useAuth();
+  const { signUp } = useAuth()
 
   const {
     register,
@@ -23,12 +23,12 @@ export function SignUp() {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(formValidationSchema),
-  });
+  })
 
   const onSubmit = handleSubmit(async (data) => {
-    const { email, password, name } = data;
-    signUp({ email, password, name });
-  });
+    const { email, password, name } = data
+    signUp({ email, password, name })
+  })
 
   return (
     <>
@@ -71,8 +71,8 @@ export function SignUp() {
           )}
         </div>
         <button type="submit">Criar conta</button>
-        <Link to="/login">Já tenho uma conta</Link>
+        <Link to="/">Já tenho uma conta</Link>
       </form>
     </>
-  );
+  )
 }

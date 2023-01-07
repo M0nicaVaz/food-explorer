@@ -58,7 +58,7 @@ export function SignIn() {
           )}
         </div>
 
-        <button type="submit">Criar conta</button>
+        <button type="submit">Entrar</button>
         <Link to="/signup">Criar uma conta</Link>
       </form>
     </>
