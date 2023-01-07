@@ -1,14 +1,27 @@
-import { CaretLeft, UploadSimple } from 'phosphor-react';
-import { useNavigate } from 'react-router-dom';
+import { CaretLeft, UploadSimple } from 'phosphor-react'
+import { useNavigate } from 'react-router-dom'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import * as zod from 'zod'
 
-import styles from './new.module.scss';
+import styles from './new.module.scss'
 
 export function New() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    // resolver: zodResolver(),
+  })
 
   function handleGoBack() {
-    navigate(-1);
+    navigate(-1)
   }
+
+  const onSubmit = handleSubmit(async (data) => {})
 
   return (
     <main className={styles.content}>
@@ -20,13 +33,13 @@ export function New() {
       <section className={styles.edit}>
         <strong>Editar prato</strong>
 
-        <form>
+        <form onSubmit={onSubmit}>
           <div className={styles.split}>
             <div className={`${styles.inputAndLabel} ${styles.small}`}>
               <label htmlFor="img">Imagem do prato</label>
-
               <input type="file" id="img" className={styles.inputFile} />
             </div>
+
             <div className={`${styles.inputAndLabel} ${styles.big}`}>
               <label htmlFor="name">Nome</label>
               <input type="text" placeholder="Ex: Salada Ceasar" id="name" />
@@ -35,10 +48,6 @@ export function New() {
 
           <div className={styles.split}>
             <div className={`${styles.inputAndLabel} ${styles.big}`}>
-              <label htmlFor="ingredients">Ingredientes</label>
-              <input type="text" />
-            </div>
-            <div className={`${styles.inputAndLabel} ${styles.small}`}>
               <label htmlFor="price">Preço</label>
               <input
                 type="text"
@@ -46,6 +55,29 @@ export function New() {
                 placeholder="R$ 00,00"
                 className={styles.small}
               />
+            </div>
+            <div className={`${styles.radioGroup} ${styles.big}`}>
+              <span>Tipo de prato</span>
+              <div>
+                <div>
+                  <input type="radio" id="meal" name="type" value="meal" />
+                  <label for="meal">Principal</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    id="dessert"
+                    name="type"
+                    value="dessert"
+                  />
+                  <label for="dessert">Sobremesa</label>
+                </div>
+
+                <div>
+                  <input type="radio" id="drink" name="type" value="drink" />
+                  <label for="drink">Bebida</label>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -61,5 +93,5 @@ export function New() {
         </form>
       </section>
     </main>
-  );
+  )
 }

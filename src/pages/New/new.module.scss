@@ -83,6 +83,23 @@
       }
     }
 
+    .radioGroup {
+      display: flex;
+      flex-direction: column;
+      margin: 2.3125rem 0 0;
+
+      > div {
+        display: flex;
+        gap: 1rem;
+        margin-top: 0.5rem;
+
+        div {
+          display: flex;
+          gap: 0.25rem;
+        }
+      }
+    }
+
     textarea {
       background-color: transparent;
       border: 1px solid $white;
@@ -114,7 +131,7 @@
     .split {
       display: flex;
       width: 100%;
-
+      gap: 2rem;
       flex-wrap: wrap;
 
       @media screen and (min-width: $desktop) {
