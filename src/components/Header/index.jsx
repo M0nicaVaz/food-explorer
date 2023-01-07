@@ -4,35 +4,35 @@ import {
   SignOut,
   X,
   ShoppingCartSimple,
-} from 'phosphor-react';
-import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Logo } from '../../components/Logo';
-import styles from './header.module.scss';
+} from 'phosphor-react'
+import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Logo } from '../../components/Logo'
+import styles from './header.module.scss'
 
-import { useCart } from '../../hooks/useCart';
-import { useOnClickOutside } from '../../hooks/useOnClickOutside';
-import { useAuth } from '../../context/useAuth';
+import { useCart } from '../../hooks/useCart'
+import { useOnClickOutside } from '../../hooks/useOnClickOutside'
+import { useAuth } from '../../context/useAuth'
 
 export function Header() {
-  const { user } = useAuth();
-  const [isOpen, setIsOpen] = useState(false);
-  const [amountOfItemsInCart, setAmountOfItemsInCart] = useState(0);
+  const { user } = useAuth()
+  const [isOpen, setIsOpen] = useState(false)
+  const [amountOfItemsInCart, setAmountOfItemsInCart] = useState(0)
 
-  const { signOut } = useAuth();
-  const { cart } = useCart();
+  const { signOut } = useAuth()
+  const { cart } = useCart()
 
-  const ref = useRef();
-  useOnClickOutside(ref, () => setIsOpen(false));
+  const ref = useRef()
+  useOnClickOutside(ref, () => setIsOpen(false))
 
   useEffect(() => {
     if (cart) {
-      const itemsInCart = cart.map((item) => item.itemsAmount);
-      const getTotalAmountOfItems = (total, num) => total + num;
-      const total = itemsInCart.reduce(getTotalAmountOfItems, 0);
-      setAmountOfItemsInCart(total);
+      const itemsInCart = cart.map((item) => item.itemsAmount)
+      const getTotalAmountOfItems = (total, num) => total + num
+      const total = itemsInCart.reduce(getTotalAmountOfItems, 0)
+      setAmountOfItemsInCart(total)
     }
-  }, [cart]);
+  }, [cart])
 
   return (
     <header className={styles.header}>
@@ -51,7 +51,7 @@ export function Header() {
             className={styles.btnMenu}
             data-count={amountOfItemsInCart}
             onClick={() => {
-              setIsOpen(true);
+              setIsOpen(true)
             }}
           >
             <ShoppingCartSimple size={24} />
@@ -63,7 +63,7 @@ export function Header() {
         </button>
       </div>
 
-      <Link to={user ? '/archive' : '/login'} className={styles.desktopOnly}>
+      <Link to="/archive" className={styles.desktopOnly}>
         <span>Histórico de pedidos</span>
       </Link>
 
@@ -91,5 +91,5 @@ export function Header() {
         Meu pedido {`(${amountOfItemsInCart})`}
       </Link>
     </header>
-  );
+  )
 }
