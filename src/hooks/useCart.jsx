@@ -49,6 +49,8 @@ export function CartContextProvider({ children }) {
       };
       dispatch(addToCartAction(item));
     }
+
+    toast.success('Adicionado ao carrinho');
   }
 
   function removeItemFromCart(itemId) {

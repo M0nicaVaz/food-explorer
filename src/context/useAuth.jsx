@@ -70,7 +70,7 @@ export function AuthProvider({ children }) {
 
     try {
       await api.post('/users', { name, email, password })
-      navigate('/login')
+      navigate('/')
     } catch (error) {
       toast.warning(error.response.data.message)
     }
@@ -87,7 +87,7 @@ export function AuthProvider({ children }) {
         user: JSON.parse(user),
       })
     }
-  }, [data])
+  }, [])
 
   return (
     <AuthContext.Provider

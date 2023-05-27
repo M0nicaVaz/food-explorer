@@ -1,27 +1,47 @@
 import { CaretLeft, UploadSimple } from 'phosphor-react'
 import { useNavigate } from 'react-router-dom'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import * as zod from 'zod'
+import { useForm, Controller } from 'react-hook-form'
+import { api } from '../../services/api'
 
 import styles from './new.module.scss'
+import { toast } from 'react-toastify'
+import { useState } from 'react'
+
 
 export function New() {
+  const [image, setImage] = useState(null)
   const navigate = useNavigate()
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm({
-    // resolver: zodResolver(),
-  })
+  } = useForm({})
 
   function handleGoBack() {
     navigate(-1)
   }
 
-  const onSubmit = handleSubmit(async (data) => {})
+  const onSubmit = handleSubmit(async (data) => {
+    const isImageEmpty = image === null
+    const isStringFieldEmpty = data.title === '' || data.price === '' || data.description === ''
+    const isTypeEmpty = data.type === null
+
+    if (isImageEmpty | isStringFieldEmpty | isTypeEmpty) return toast.warning('Verifique todos os campos')
+
+    try {
+      const formData = new FormData();
+
+      formData.append("image", image[0]);
+      data = { ...data, image: image[0].name };
+      formData.append("data", JSON.stringify(data));
+
+      await api.post('/products', formData)
+
+    } catch (error) {
+      console.log(error)
+    }
+
+  })
 
   return (
     <main className={styles.content}>
@@ -36,13 +56,13 @@ export function New() {
         <form onSubmit={onSubmit}>
           <div className={styles.split}>
             <div className={`${styles.inputAndLabel} ${styles.small}`}>
-              <label htmlFor="img">Imagem do prato</label>
-              <input type="file" id="img" className={styles.inputFile} />
+              <label htmlFor="image"> Imagem do prato</label>
+              <input type="file" id="image" className={styles.inputFile} onChange={(e) => setImage(e.target.files)} />
             </div>
 
             <div className={`${styles.inputAndLabel} ${styles.big}`}>
-              <label htmlFor="name">Nome</label>
-              <input type="text" placeholder="Ex: Salada Ceasar" id="name" />
+              <label htmlFor="title">Nome</label>
+              <input type="text" id="title" placeholder="Ex: Salada Ceasar"  {...register("title")} />
             </div>
           </div>
 
@@ -50,32 +70,34 @@ export function New() {
             <div className={`${styles.inputAndLabel} ${styles.big}`}>
               <label htmlFor="price">Preço</label>
               <input
-                type="text"
                 id="price"
+                type="text"
                 placeholder="R$ 00,00"
                 className={styles.small}
+                {...register('price')}
               />
             </div>
             <div className={`${styles.radioGroup} ${styles.big}`}>
               <span>Tipo de prato</span>
               <div>
                 <div>
-                  <input type="radio" id="meal" name="type" value="meal" />
-                  <label for="meal">Principal</label>
+                  <input id="meal" type="radio" name="type" value="meal"  {...register('type')} />
+                  <label htmlFor="meal">Principal</label>
                 </div>
                 <div>
                   <input
                     type="radio"
-                    id="dessert"
                     name="type"
                     value="dessert"
+                    id="dessert"
+                    {...register('type')}
                   />
-                  <label for="dessert">Sobremesa</label>
+                  <label htmlFor="dessert">Sobremesa</label>
                 </div>
 
                 <div>
-                  <input type="radio" id="drink" name="type" value="drink" />
-                  <label for="drink">Bebida</label>
+                  <input id="drink" type="radio" name="type" value="drink"  {...register('type')} />
+                  <label htmlFor="drink">Bebida</label>
                 </div>
               </div>
             </div>
@@ -84,7 +106,7 @@ export function New() {
           <div className={styles.inputAndLabel}>
             <label htmlFor="description">Descrição</label>
             <textarea
-              id="description"
+              {...register('description')}
               placeholder="Fale brevemente sobre o prato, seus ingredientes e composição"
             />
           </div>
