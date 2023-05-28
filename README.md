@@ -5,8 +5,8 @@
   <br>
   
   <div float="left">
-   <img src="./.github/desktop.png" width="680px" > 
-    <img src="./.github/mobile.gif" width="190px" >
+   <img src="./.github/desktop.png" width="480px" > 
+    <img src="./.github/mobile.gif" width="180px" >
   </div>
   
 ## Setup
