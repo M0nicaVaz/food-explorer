@@ -1,9 +1,0 @@
-.rec-arrow {
-  color: #fff !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
-}
-
-.rec-arrow:hover {
-  color: hsl(186, 100%, 75%) !important;
-}

@@ -1,3 +1,10 @@
+.swiper {
+  width: min(70rem, 90vw);
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
 .loading {
   display: block;
   margin: auto;

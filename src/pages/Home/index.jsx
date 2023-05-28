@@ -1,21 +1,25 @@
-import Carousel from 'react-elastic-carousel';
+
 import heroSVG from '../../assets/hero.svg';
 import { Card } from '../../components/Card';
-import '../../styles/overrideCarousel.css';
 import styles from './home.module.scss';
 import { useEffect, useState } from 'react';
 import { api } from '../../services/api';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { useScreenSize } from '../../context/useScreenSize';
+import 'swiper/css';
 
-const breakPoints = [
-  { width: 1, itemsToShow: 1 },
-  { width: 640, itemsToShow: 2 },
-  { width: 768, itemsToShow: 3 },
-  { width: 1024, itemsToShow: 4 },
-];
 
 export function Home() {
   const [isLoading, setIsLoading] = useState(true)
   const [products, setProducts] = useState([])
+  const { screenSize } = useScreenSize()
+
+  function getSlidesPerView() {
+    if (screenSize === 'fullHd') return 3
+    if (screenSize === 'desktop') return 3
+    if (screenSize === 'tablet') return 2
+    return 1
+  }
 
   useEffect(() => {
     async function getProducts() {
@@ -63,11 +67,17 @@ export function Home() {
         <strong className={styles.sectionTitle}> Pratos principais</strong>
         {
           isLoading ? <span className={styles.loading} >Carregando...</span> :
-            <Carousel itemPosition='START' breakPoints={breakPoints} pagination={false}>
+            <Swiper
+              className={styles.swiper}
+              spaceBetween={24}
+              slidesPerView={getSlidesPerView()}
+            >
               {products.meals.map((meal) => (
-                <Card data={meal} key={meal.id} />
+                <SwiperSlide>
+                  <Card data={meal} key={meal.id} />
+                </SwiperSlide>
               ))}
-            </Carousel>
+            </Swiper>
         }
       </section>
 
@@ -75,16 +85,19 @@ export function Home() {
         <strong className={styles.sectionTitle}> Sobremesas</strong>
         {
           isLoading ? <span className={styles.loading} >Carregando...</span> :
-            <Carousel
-              itemPosition='START'
-              breakPoints={breakPoints}
-              pagination={false}
-              outerSpacing={20}
+            <Swiper
+              className={styles.swiper}
+              spaceBetween={24}
+              slidesPerView={getSlidesPerView()}
             >
-              {products.desserts.map((dessert) => (
-                <Card data={dessert} key={dessert.id} />
-              ))}
-            </Carousel>
+              <div>
+                {products.desserts.map((dessert) => (
+                  <SwiperSlide>
+                    <Card data={dessert} key={dessert.id} />
+                  </SwiperSlide>
+                ))}
+              </div>
+            </Swiper>
         }
       </section>
 
@@ -92,15 +105,19 @@ export function Home() {
         <strong className={styles.sectionTitle}> Bebidas</strong>
         {
           isLoading ? <span className={styles.loading} >Carregando...</span> :
-            <Carousel
-              itemPosition='START'
-              breakPoints={breakPoints}
-              pagination={false}
+            <Swiper
+              className={styles.swiper}
+              spaceBetween={24}
+              slidesPerView={getSlidesPerView()}
             >
-              {products.drinks.map((drink) => (
-                <Card data={drink} key={drink.id} />
-              ))}
-            </Carousel>
+              <div>
+                {products.drinks.map((drink) => (
+                  <SwiperSlide>
+                    <Card data={drink} key={drink.id} />
+                  </SwiperSlide>
+                ))}
+              </div>
+            </Swiper>
         }
       </section>
     </main>
