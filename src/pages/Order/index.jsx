@@ -6,6 +6,7 @@ import { OrderItem } from '../../components/OrderItem';
 import { PaymentForm } from '../../components/PaymentForm';
 import styles from './order.module.scss';
 import { useCart } from '../../hooks/useCart';
+import { formatPrice } from '../../utils/formatPrice';
 
 export function Order() {
   const [paymentType, setPaymentType] = useState('card');
@@ -53,7 +54,7 @@ export function Order() {
             ))}
         </ul>
 
-        <span className={styles.total}>Total: R$ {totalPrice.toFixed(2)} </span>
+        <span className={styles.total}>Total: {formatPrice(totalPrice)} </span>
       </div>
 
       <div className={styles.payment}>

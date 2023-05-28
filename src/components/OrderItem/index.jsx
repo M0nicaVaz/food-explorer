@@ -1,6 +1,7 @@
 import styles from './orderitem.module.scss';
 import { useContext } from 'react';
 import { CartContext } from '../../hooks/useCart';
+import { formatPrice } from '../../utils/formatPrice';
 
 export function OrderItem({ item, ...rest }) {
   const { removeItemFromCart } = useContext(CartContext);
@@ -16,7 +17,7 @@ export function OrderItem({ item, ...rest }) {
         <div>
           <span>{item.itemsAmount} x</span>
           <span>{item.product.title} </span>
-          <span className={styles.price}> R$ {item.product.price} </span>
+          <span className={styles.price}>{formatPrice(item.product.price)}</span>
         </div>
         <button onClick={handleRemoveItem}>Excluir</button>
       </div>

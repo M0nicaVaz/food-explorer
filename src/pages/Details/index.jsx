@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { CaretLeft } from 'phosphor-react';
 import { Form } from '../../components/Form';
 import { api } from '../../services/api';
+import { formatPrice } from '../../utils/formatPrice';
 
 export function Details() {
   const [isLoading, setIsLoading] = useState(true);
@@ -13,10 +14,6 @@ export function Details() {
 
   function handleGoBack() {
     navigate(-1);
-  }
-
-  function formatPrice(price) {
-    return `R$ ${Number(price).toFixed(2).toString().replace('.', ',')}`;
   }
 
   useEffect(() => {
@@ -39,9 +36,10 @@ export function Details() {
   }, [])
 
   return (
+
     <>
       {
-        isLoading ? <span className={styles.loading} >...carregando</span> :
+        isLoading ? <span className={styles.loading} >Carregando...</span> :
           <main className={styles.content}>
 
             <button className={styles.backBtn} onClick={handleGoBack}>

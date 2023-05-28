@@ -1,8 +1,12 @@
+.loading {
+  display: block;
+  margin: auto;
+  color: $blue-100;
+}
+
 .content {
   max-width: 90rem;
-
   margin: 10rem auto;
-
   padding: 0 1rem;
 
   .hero {
