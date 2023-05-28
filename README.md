@@ -1,21 +1,24 @@
 <div align="center">
-<h1>Rick and Morty Characters Guide</h1>
-Click <a href = "https://rick-and-morty-guide.vercel.app/">here</a> to see it live!
-
-## Preview
-
-<img src="./.github/mobile.gif" width="680px" >
-
+ <h1>Food Explorer</h1>
+  Click <a href = "https://food-explorer-one.vercel.app/">here</a> to see it live. <a href = "https://github.com/M0nicaVaz/food-explorer-api">Or go to backend repo.</a> 
+  <br>
+  <br>
+  
+  <div float="left">
+   <img src="./.github/desktop.png" width="680px" > 
+    <img src="./.github/mobile.gif" width="190px" >
+  </div>
+  
 ## Setup
 
 **Clone the project and access the folder**
 
 ```bash
-git clone https://github.com/M0nicaVaz/rick-and-morty.git && cd rick-and-morty
+git clone https://github.com/M0nicaVaz/food-explorer.git && cd food-explorer
 ```
 
 **Follow the steps below**
-
+  
 ```bash
 # Install the dependencies
 yarn or npm install
@@ -24,16 +27,10 @@ yarn or npm install
 npm run dev
 # or
 yarn dev
-
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:5173](http://localhost:5173) with your browser to see the result.
 
 ## Tech Stack
-
-Made with 💜 but also with
-[Rick and Morty API](https://rickandmortyapi.com/documentation/), [Next.js](https://nextjs.org/), [React](https://reactjs.org/), [TypeScript](https://www.typescriptlang.org/) and [Tailwind](https://tailwindcss.com/).
-
-<br> by <a href="https://www.linkedin.com/in/monica-vaz/"> Monica Vaz </a>
-
+Made with 💜 by <a href="https://www.linkedin.com/in/monica-vaz/"> Monica Vaz </a> 
 </div>
