@@ -83,17 +83,6 @@
       }
     }
 
-    .ingredients {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 2.6875rem;
-      justify-content: center;
-
-      @media screen and (min-width: $desktop) {
-        justify-content: flex-start;
-      }
-    }
-
     footer {
       display: flex;
       flex-wrap: wrap;
