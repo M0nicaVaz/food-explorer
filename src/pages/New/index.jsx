@@ -35,7 +35,10 @@ export function New() {
       data = { ...data, image: image[0].name };
       formData.append("data", JSON.stringify(data));
 
-      await api.post('/products', formData)
+      const res = await api.post('/products', formData)
+
+      toast.success('Prato adicionado com sucesso!')
+      navigate(`/details/${res.data.id}`)
 
     } catch (error) {
       console.log(error)
@@ -70,8 +73,10 @@ export function New() {
             <div className={`${styles.inputAndLabel} ${styles.big}`}>
               <label htmlFor="price">Preço</label>
               <input
+                step="0.10"
+                pattern="^\d*(\.\d{0,2})?$"
                 id="price"
-                type="text"
+                type="number"
                 placeholder="R$ 00,00"
                 className={styles.small}
                 {...register('price')}
