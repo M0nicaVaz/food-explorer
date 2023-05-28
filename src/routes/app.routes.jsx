@@ -10,6 +10,7 @@ import { SignUp } from '../pages/SignUp'
 import { SignIn } from '../pages/SignIn'
 import { useAuth } from '../context/useAuth'
 
+
 export function AppRoutes() {
   const { user } = useAuth()
 
@@ -21,7 +22,7 @@ export function AppRoutes() {
           <Route path="/details/:id" element={<Details />} />
           <Route path="/archive" element={<Archive />} />
           <Route path="/order" element={<Order />} />
-          <Route path="/new" element={<New />} />
+          <Route path="/admin/new" element={<New />} />
         </Route>
       ) : (
         <Route path="/" element={<AuthLayout />}>
