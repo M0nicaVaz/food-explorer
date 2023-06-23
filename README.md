@@ -2,6 +2,9 @@
  <h1>Food Explorer</h1>
   Click <a href = "https://food-explorer-one.vercel.app/">here</a> to see it live. <a href = "https://github.com/M0nicaVaz/food-explorer-api">Or go to backend repo.</a> 
   <br>
+ 
+ Don't forget to access `admin/new` to add products!
+ 
   <br>
   
   <div float="left">
