@@ -1,0 +1,11 @@
+.wrapper {
+  min-height: 100vh;
+  display: grid;
+  overflow-x: hidden;
+
+  grid-template-rows: 8rem auto 5rem;
+
+  @media screen and (min-width: $desktop) {
+    grid-template-rows: 6.5rem auto 5rem;
+  }
+}

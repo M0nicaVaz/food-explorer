@@ -1,4 +1,4 @@
-import { CaretLeft, UploadSimple } from 'phosphor-react'
+import { CaretLeft, UploadSimple, Plus } from 'phosphor-react'
 import { useNavigate } from 'react-router-dom'
 import { useForm, Controller } from 'react-hook-form'
 import { api } from '../../services/api'
@@ -6,10 +6,14 @@ import { api } from '../../services/api'
 import styles from './new.module.scss'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
+import { NewTag } from '../../components/NewTag'
+import { useEffect } from 'react'
 
 
 export function New() {
   const [image, setImage] = useState(null)
+  const [tags, setTags] = useState([]);
+  const [newTag, setNewTag] = useState('');
   const navigate = useNavigate()
 
   const {
@@ -46,6 +50,25 @@ export function New() {
 
   })
 
+  function handleAddTag() {
+    if (newTag.trim().length === 0) {
+      return null;
+    }
+
+    setTags((prevState) => [...prevState, newTag]);
+    setNewTag('');
+  }
+
+  function handleRemoveTag(deleted) {
+    setTags((prevState) => prevState.filter((tag) => tag !== deleted));
+  }
+
+  useEffect(() => {
+    const tags = []
+    const newTags = tags.map((tag) => tag.name);
+    setNewTag(newTags);
+  }, [])
+
   return (
     <main className={styles.content}>
       <button className={styles.backBtn} onClick={handleGoBack}>
@@ -67,9 +90,7 @@ export function New() {
               <label htmlFor="title">Nome</label>
               <input type="text" id="title" placeholder="Ex: Salada Ceasar"  {...register("title")} />
             </div>
-          </div>
 
-          <div className={styles.split}>
             <div className={`${styles.inputAndLabel} ${styles.big}`}>
               <label htmlFor="price">Preço</label>
               <input
@@ -82,6 +103,37 @@ export function New() {
                 {...register('price')}
               />
             </div>
+          </div>
+
+
+          <div className={styles.split}>
+
+            <div>
+              <label htmlFor="title">Ingredientes</label>
+              <div className={styles.tags}>
+                {tags.map((tag, index) => (
+                  <NewTag
+                    key={String(index)}
+                    value={tag}
+                    onClick={() => {
+                      handleRemoveTag(tag);
+                    }}
+                  />
+                ))}
+
+                <NewTag
+                  isNew
+                  maxLength={30}
+                  placeholder="Adicionar"
+                  onChange={(e) => setNewTag(e.target.value)}
+                  value={newTag}
+                  onClick={handleAddTag}
+                />
+              </div>
+            </div>
+
+
+
             <div className={`${styles.radioGroup} ${styles.big}`}>
               <span>Tipo de prato</span>
               <div>
@@ -116,9 +168,9 @@ export function New() {
             />
           </div>
 
-          <button>Adicionar Prato</button>
+          <button className={styles.buttonAdd} > Adicionar Prato</button>
         </form>
       </section>
-    </main>
+    </main >
   )
 }

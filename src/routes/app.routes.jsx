@@ -9,21 +9,45 @@ import { Order } from '../pages/Order'
 import { SignUp } from '../pages/SignUp'
 import { SignIn } from '../pages/SignIn'
 import { useAuth } from '../context/useAuth'
+import { AdminLayout } from '../layouts/AdminLayout'
 
 
 export function AppRoutes() {
-  const { user } = useAuth()
+  const user = true;
+
+  const admin = true;
 
   return (
     <Routes>
+
+
+
       {user ? (
-        <Route path="/" element={<DefaultLayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/details/:id" element={<Details />} />
-          <Route path="/archive" element={<Archive />} />
-          <Route path="/order" element={<Order />} />
-          <Route path="/admin/new" element={<New />} />
-        </Route>
+        <>
+          {
+            admin ?
+              <Route path="/" element={<AdminLayout />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/details/:id" element={<Details />} />
+                <Route path="/archive" element={<Archive />} />
+                <Route path="/order" element={<Order />} />
+                <Route path="/admin/new" element={<New />} />
+              </Route>
+              :
+              <Route path="/" element={<DefaultLayout />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/details/:id" element={<Details />} />
+                <Route path="/archive" element={<Archive />} />
+                <Route path="/order" element={<Order />} />
+                <Route path="/admin/new" element={<New />} />
+              </Route>
+
+
+
+          }
+
+        </>
+
       ) : (
         <Route path="/" element={<AuthLayout />}>
           <Route path="/" element={<SignIn />} />

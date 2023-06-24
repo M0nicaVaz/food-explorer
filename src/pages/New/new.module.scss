@@ -86,7 +86,6 @@
     .radioGroup {
       display: flex;
       flex-direction: column;
-      margin: 2.3125rem 0 0;
 
       > div {
         display: flex;
@@ -121,38 +120,50 @@
 
     .split {
       display: flex;
+      align-items: center;
+      justify-content: space-between;
       width: 100%;
       gap: 2rem;
       flex-wrap: wrap;
+      margin-top: 14px;
 
       @media screen and (min-width: $desktop) {
         gap: 1.0625rem;
       }
     }
-
-    button {
-      width: min(22.3125rem, 80vw);
-      flex: 1;
-
-      border: 1px solid $white;
-      background-color: rgba(255, 255, 255, 0.05);
-      color: $white;
-
-      font-weight: 500;
-
-      padding: 0.75rem 0;
-      border-radius: 5px;
-
-      margin-top: 0.875rem;
-      align-self: center;
-
-      &:hover {
-        background-color: $blue-900;
-      }
-
-      @media screen and (min-width: $desktop) {
-        align-self: flex-end;
-      }
-    }
   }
+}
+
+.buttonAdd {
+  width: min(22.3125rem, 80vw);
+  flex: 1;
+
+  border: 1px solid $white;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: $white;
+
+  font-weight: 500;
+
+  padding: 0.75rem 0;
+  border-radius: 5px;
+
+  margin-top: 0.875rem;
+  align-self: center;
+
+  &:hover {
+    background-color: $blue-900;
+  }
+
+  @media screen and (min-width: $desktop) {
+    align-self: flex-end;
+  }
+}
+
+.tags {
+  border-radius: 0.8rem;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
