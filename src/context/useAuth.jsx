@@ -29,6 +29,7 @@ export function AuthProvider({ children }) {
 
 
       navigate('/')
+      window.location.reload(false);
     } catch (error) {
       if (error.response) {
         toast.warning(error.response.data.message)

@@ -13,10 +13,13 @@ import styles from './header.module.scss'
 import { useCart } from '../../hooks/useCart'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 import { useAuth } from '../../context/useAuth'
+import { useSearch } from '../../context/useSearch'
 
 export function Header() {
+  const { setSearch } = useSearch()
   const [isOpen, setIsOpen] = useState(false)
   const [amountOfItemsInCart, setAmountOfItemsInCart] = useState(0)
+  const { pathname } = window.location
 
   const { signOut } = useAuth()
   const { cart } = useCart()
@@ -69,7 +72,7 @@ export function Header() {
       <div className={styles.search}>
         <MagnifyingGlass size={22} />
 
-        <input type="text" id="search" placeholder="Busque opções de pratos" />
+        <input disabled={pathname !== "/"} type="text" id="search" placeholder="Busque por pratos ou ingredientes" onChange={(e) => setSearch(e.target.value)} />
       </div>
 
       <div
