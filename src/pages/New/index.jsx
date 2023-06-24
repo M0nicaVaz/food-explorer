@@ -11,15 +11,18 @@ import { useEffect } from 'react'
 
 
 export function New() {
+  const [product, setProduct] = useState({});
   const [image, setImage] = useState(null)
   const [tags, setTags] = useState([]);
   const [newTag, setNewTag] = useState('');
   const navigate = useNavigate()
-
   const {
     register,
     handleSubmit,
   } = useForm({})
+
+
+
 
   function handleGoBack() {
     navigate(-1)
@@ -69,6 +72,31 @@ export function New() {
     setNewTag(newTags);
   }, [])
 
+  useEffect(() => {
+
+    const searchParams = new URLSearchParams(document.location.search)
+    const productId = searchParams.get('product')
+
+    async function getProduct() {
+      if (!product) return
+
+      try {
+        const { data } = await api.get(`/products/${productId}`)
+        const productImageUrl = `${api.defaults.baseURL}/files/${data.image}`
+
+        if (data) {
+          setProduct({ ...data, src: productImageUrl })
+        }
+      }
+      catch (error) {
+        console.log(error)
+      }
+    }
+
+    getProduct()
+    console.log(product)
+  }, [])
+
 
 
   return (
@@ -91,7 +119,7 @@ export function New() {
 
             <div className={`${styles.inputAndLabel} ${styles.big}`}>
               <label htmlFor="title">Nome</label>
-              <input type="text" id="title" placeholder="Ex: Salada Ceasar"  {...register("title")} />
+              <input defaultValue={product && product.title} type="text" id="title" placeholder="Ex: Salada Ceasar"  {...register("title")} />
             </div>
 
             <div className={`${styles.inputAndLabel} ${styles.big}`}>
@@ -103,6 +131,7 @@ export function New() {
                 type="number"
                 placeholder="R$ 00,00"
                 className={styles.small}
+                defaultValue={product && product.price}
                 {...register('price')}
               />
             </div>
@@ -164,6 +193,7 @@ export function New() {
           <div className={styles.inputAndLabel}>
             <label htmlFor="description">Descrição</label>
             <textarea
+              defaultValue={product && product.description}
               {...register('description')}
               placeholder="Fale brevemente sobre o prato, seus ingredientes e composição"
             />

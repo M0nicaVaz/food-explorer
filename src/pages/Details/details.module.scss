@@ -105,3 +105,16 @@
     }
   }
 }
+
+.orderBtn {
+  width: fit-content;
+  background-color: $red-500;
+  color: $white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 12px 24px;
+  display: flex;
+  border: none;
+  border-radius: 5px;
+}

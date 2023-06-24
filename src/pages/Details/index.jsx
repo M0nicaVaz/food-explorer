@@ -1,16 +1,18 @@
 import styles from './details.module.scss';
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { CaretLeft } from 'phosphor-react';
 import { Form } from '../../components/Form';
 import { api } from '../../services/api';
 import { formatPrice } from '../../utils/formatPrice';
+import { useAuth } from '../../context/useAuth'
 
 export function Details() {
   const [isLoading, setIsLoading] = useState(true);
   const [product, setProduct] = useState({});
   const navigate = useNavigate();
   const { id } = useParams();
+  const { isAdmin } = useAuth();
 
   function handleGoBack() {
     navigate(-1);
@@ -55,11 +57,18 @@ export function Details() {
 
                 <span className={styles.subtitle}>{product.description}</span>
 
-                <footer>
-                  <span className={styles.price}>{formatPrice(product.price)}</span>
+                {
+                  isAdmin ?
+                    <Link to={`/admin/new?product=${id}`} className={`${styles.orderBtn}`}>
+                      Editar prato
+                    </Link>
+                    :
+                    <footer>
+                      <span className={styles.price}>{formatPrice(product.price)}</span>
+                      <Form data={product} className={styles.stepper} />
+                    </footer>
+                }
 
-                  <Form data={product} className={styles.stepper} />
-                </footer>
               </div>
             </div>
           </main>

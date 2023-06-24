@@ -13,24 +13,19 @@ import { AdminLayout } from '../layouts/AdminLayout'
 
 
 export function AppRoutes() {
-  const user = true;
+  const { user, isAdmin } = useAuth();
 
-  const admin = true;
 
   return (
     <Routes>
 
-
-
       {user ? (
         <>
           {
-            admin ?
+            isAdmin ?
               <Route path="/" element={<AdminLayout />}>
                 <Route path="/" element={<Home />} />
                 <Route path="/details/:id" element={<Details />} />
-                <Route path="/archive" element={<Archive />} />
-                <Route path="/order" element={<Order />} />
                 <Route path="/admin/new" element={<New />} />
               </Route>
               :
@@ -39,15 +34,9 @@ export function AppRoutes() {
                 <Route path="/details/:id" element={<Details />} />
                 <Route path="/archive" element={<Archive />} />
                 <Route path="/order" element={<Order />} />
-                <Route path="/admin/new" element={<New />} />
               </Route>
-
-
-
           }
-
         </>
-
       ) : (
         <Route path="/" element={<AuthLayout />}>
           <Route path="/" element={<SignIn />} />

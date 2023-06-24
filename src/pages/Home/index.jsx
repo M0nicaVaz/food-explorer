@@ -73,8 +73,8 @@ export function Home() {
               slidesPerView={getSlidesPerView()}
             >
               {products.meals.map((meal) => (
-                <SwiperSlide>
-                  <Card data={meal} key={meal.id} />
+                <SwiperSlide key={meal.id}>
+                  <Card data={meal} />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -92,8 +92,8 @@ export function Home() {
             >
               <div>
                 {products.desserts.map((dessert) => (
-                  <SwiperSlide>
-                    <Card data={dessert} key={dessert.id} />
+                  <SwiperSlide key={dessert.id}>
+                    <Card data={dessert} />
                   </SwiperSlide>
                 ))}
               </div>
@@ -112,8 +112,8 @@ export function Home() {
             >
               <div>
                 {products.drinks.map((drink) => (
-                  <SwiperSlide>
-                    <Card data={drink} key={drink.id} />
+                  <SwiperSlide key={drink.id}>
+                    <Card data={drink} />
                   </SwiperSlide>
                 ))}
               </div>

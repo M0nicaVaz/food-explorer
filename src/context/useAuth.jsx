@@ -6,6 +6,7 @@ import { api } from '../services/api'
 export const AuthContext = createContext({})
 
 export function AuthProvider({ children }) {
+  const [isAdmin, setIsAdmin] = useState(false)
   const [data, setData] = useState({})
   const navigate = useNavigate()
 
@@ -17,8 +18,15 @@ export function AuthProvider({ children }) {
       localStorage.setItem('@foodexplorer:user', JSON.stringify(user))
       localStorage.setItem('@foodexplorer:token', token)
 
+      if (user.email === "contaadmin@teste.com") {
+        localStorage.setItem('@foodexplorer:isAdmin', true)
+      }
+
+
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`
       setData({ user, token })
+
+
 
       navigate('/')
     } catch (error) {
@@ -33,6 +41,7 @@ export function AuthProvider({ children }) {
   function signOut() {
     localStorage.removeItem('@foodexplorer:token')
     localStorage.removeItem('@foodexplorer:user')
+    localStorage.removeItem('@foodexplorer:isAdmin')
     setData({})
     navigate('/')
   }
@@ -76,9 +85,13 @@ export function AuthProvider({ children }) {
     }
   }
 
+
   useEffect(() => {
     const token = localStorage.getItem('@foodexplorer:token')
     const user = localStorage.getItem('@foodexplorer:user')
+    const admin = localStorage.getItem('@foodexplorer:isAdmin')
+
+    if (admin) setIsAdmin(true)
 
     if (token && user) {
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`
@@ -87,6 +100,7 @@ export function AuthProvider({ children }) {
         user: JSON.parse(user),
       })
     }
+
   }, [])
 
   return (
@@ -97,6 +111,7 @@ export function AuthProvider({ children }) {
         signUp,
         updateProfile,
         user: data.user,
+        isAdmin
       }}
     >
       {children}
