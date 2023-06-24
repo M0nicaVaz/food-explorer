@@ -69,6 +69,8 @@ export function New() {
     setNewTag(newTags);
   }, [])
 
+
+
   return (
     <main className={styles.content}>
       <button className={styles.backBtn} onClick={handleGoBack}>
@@ -84,6 +86,7 @@ export function New() {
             <div className={`${styles.inputAndLabel} ${styles.small}`}>
               <label htmlFor="image"> Imagem do prato</label>
               <input type="file" id="image" className={styles.inputFile} onChange={(e) => setImage(e.target.files)} />
+              <small>{image && image[0].name}</small>
             </div>
 
             <div className={`${styles.inputAndLabel} ${styles.big}`}>
@@ -131,8 +134,6 @@ export function New() {
                 />
               </div>
             </div>
-
-
 
             <div className={`${styles.radioGroup} ${styles.big}`}>
               <span>Tipo de prato</span>

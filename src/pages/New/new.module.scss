@@ -35,8 +35,22 @@
       width: 100%;
       display: flex;
       margin: 2.3125rem 0 0;
-
+      position: relative;
       flex-direction: column;
+
+      small {
+        font-size: 0.75rem;
+        color: $gray-100;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        margin: auto;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 120px;
+        text-align: right;
+      }
 
       &.small {
         @media screen and (min-width: $desktop) {
@@ -125,7 +139,7 @@
       width: 100%;
       gap: 2rem;
       flex-wrap: wrap;
-      margin-top: 14px;
+      margin-top: 18px;
 
       @media screen and (min-width: $desktop) {
         gap: 1.0625rem;
