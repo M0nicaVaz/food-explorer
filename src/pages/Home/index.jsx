@@ -7,12 +7,16 @@ import { api } from '../../services/api';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useScreenSize } from '../../context/useScreenSize';
 import 'swiper/css';
-
+import { useSearch } from '../../context/useSearch';
 
 export function Home() {
   const [isLoading, setIsLoading] = useState(true)
   const [products, setProducts] = useState([])
+  const [searchProducts, setSearchProducts] = useState([])
+  const [foundProducts, setFoundProducts] = useState([])
   const { screenSize } = useScreenSize()
+  const { search } = useSearch()
+  const isSearchActive = search !== undefined && search !== ''
 
   function getSlidesPerView() {
     if (screenSize === 'fullHd') return 3
@@ -20,6 +24,12 @@ export function Home() {
     if (screenSize === 'tablet') return 2
     return 1
   }
+
+  useEffect(() => {
+    const found = searchProducts.filter((product) => product.title.toLowerCase().includes(search.toLowerCase()))
+    setFoundProducts(found)
+    console.log(found)
+  }, [search])
 
   useEffect(() => {
     async function getProducts() {
@@ -38,6 +48,7 @@ export function Home() {
           const drinks = dataWithFormattedImageUrl.filter((product) => product.type === 'drink')
 
           setProducts({ meals, desserts, drinks })
+          setSearchProducts(dataWithFormattedImageUrl)
           setIsLoading(false)
         }
       }
@@ -63,63 +74,79 @@ export function Home() {
         </div>
       </div>
 
-      <section >
-        <strong className={styles.sectionTitle}> Pratos principais</strong>
-        {
-          isLoading ? <span className={styles.loading} >Carregando...</span> :
-            <Swiper
-              className={styles.swiper}
-              spaceBetween={24}
-              slidesPerView={getSlidesPerView()}
-            >
-              {products.meals.map((meal) => (
-                <SwiperSlide key={meal.id}>
-                  <Card data={meal} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-        }
-      </section>
 
-      <section >
-        <strong className={styles.sectionTitle}> Sobremesas</strong>
-        {
-          isLoading ? <span className={styles.loading} >Carregando...</span> :
-            <Swiper
-              className={styles.swiper}
-              spaceBetween={24}
-              slidesPerView={getSlidesPerView()}
-            >
-              <div>
-                {products.desserts.map((dessert) => (
-                  <SwiperSlide key={dessert.id}>
-                    <Card data={dessert} />
-                  </SwiperSlide>
-                ))}
-              </div>
-            </Swiper>
-        }
-      </section>
+      {
+        isSearchActive ?
+          <section>
+            <strong className={styles.sectionTitle}>Item(s) encontrado(s) </strong>
+            {foundProducts.map((product) => (
+              <SwiperSlide key={product.id}>
+                <Card data={product} />
+              </SwiperSlide>
+            ))}
+          </section>
+          :
+          <>
+            <section >
+              <strong className={styles.sectionTitle}> Pratos principais</strong>
+              {
+                isLoading ? <span className={styles.loading} >Carregando...</span> :
+                  <Swiper
+                    className={styles.swiper}
+                    spaceBetween={24}
+                    slidesPerView={getSlidesPerView()}
+                  >
+                    {products.meals.map((meal) => (
+                      <SwiperSlide key={meal.id}>
+                        <Card data={meal} />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+              }
+            </section>
 
-      <section  >
-        <strong className={styles.sectionTitle}> Bebidas</strong>
-        {
-          isLoading ? <span className={styles.loading} >Carregando...</span> :
-            <Swiper
-              className={styles.swiper}
-              spaceBetween={24}
-              slidesPerView={getSlidesPerView()}
-            >
-              <div>
-                {products.drinks.map((drink) => (
-                  <SwiperSlide key={drink.id}>
-                    <Card data={drink} />
-                  </SwiperSlide>
-                ))}
-              </div>
-            </Swiper>
-        }
-      </section>
+            <section >
+              <strong className={styles.sectionTitle}> Sobremesas</strong>
+              {
+                isLoading ? <span className={styles.loading} >Carregando...</span> :
+                  <Swiper
+                    className={styles.swiper}
+                    spaceBetween={24}
+                    slidesPerView={getSlidesPerView()}
+                  >
+                    <div>
+                      {products.desserts.map((dessert) => (
+                        <SwiperSlide key={dessert.id}>
+                          <Card data={dessert} />
+                        </SwiperSlide>
+                      ))}
+                    </div>
+                  </Swiper>
+              }
+            </section>
+
+            <section  >
+              <strong className={styles.sectionTitle}> Bebidas</strong>
+              {
+                isLoading ? <span className={styles.loading} >Carregando...</span> :
+                  <Swiper
+                    className={styles.swiper}
+                    spaceBetween={24}
+                    slidesPerView={getSlidesPerView()}
+                  >
+                    <div>
+                      {products.drinks.map((drink) => (
+                        <SwiperSlide key={drink.id}>
+                          <Card data={drink} />
+                        </SwiperSlide>
+                      ))}
+                    </div>
+                  </Swiper>
+              }
+            </section>
+          </>
+      }
+
     </main>
   );
 }

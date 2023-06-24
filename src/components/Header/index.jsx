@@ -15,7 +15,6 @@ import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 import { useAuth } from '../../context/useAuth'
 
 export function Header() {
-  const { user } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
   const [amountOfItemsInCart, setAmountOfItemsInCart] = useState(0)
 

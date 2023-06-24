@@ -9,9 +9,12 @@ import { Logo } from '../Logo'
 import styles from './header.module.scss'
 
 import { useAuth } from '../../context/useAuth'
+import { useSearch } from '../../context/useSearch'
 
 export function AdminHeader() {
+  const { setSearch } = useSearch()
   const { signOut } = useAuth()
+  const { pathname } = window.location
 
   return (
     <header className={styles.header}>
@@ -26,7 +29,7 @@ export function AdminHeader() {
 
       <div className={styles.search}>
         <MagnifyingGlass size={22} />
-        <input type="text" id="search" placeholder="Busque por pratos ou ingredientes" />
+        <input disabled={pathname !== "/"} type="text" id="search" placeholder="Busque por pratos ou ingredientes" onChange={(e) => setSearch(e.target.value)} />
       </div>
 
 

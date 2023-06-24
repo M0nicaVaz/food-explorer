@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../styles/overrideToast.css';
 import { AuthProvider } from '../context/useAuth';
 import { ScreenSizeContextProvider } from '../context/useScreenSize';
+import { SearchContextProvider } from '../context/useSearch';
 
 export function Routes() {
   return (
@@ -15,8 +16,10 @@ export function Routes() {
       <AuthProvider>
         <CartContextProvider>
           <ScreenSizeContextProvider>
-            <CustomToaster />
-            <AppRoutes />
+            <SearchContextProvider>
+              <CustomToaster />
+              <AppRoutes />
+            </SearchContextProvider>
           </ScreenSizeContextProvider>
         </CartContextProvider>
       </AuthProvider>
