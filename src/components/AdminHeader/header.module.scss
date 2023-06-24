@@ -1,8 +1,8 @@
 .header {
   background-color: $blue-900;
-
-  display: flex;
   flex-wrap: wrap;
+  display: flex;
+  height: 140px;
   align-items: center;
   justify-content: space-between;
 
@@ -12,15 +12,22 @@
   font-weight: 400;
   font-size: 0.875rem;
 
+  & svg {
+    line-height: 1;
+  }
+
   .search {
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 8px;
+    order: 1;
+    flex: 1;
+    margin-right: 12px;
+    margin-top: 12px;
 
     background-color: $blue-800;
-    padding: 0.35rem 0.875rem;
+    padding: 0.25rem 0.875rem;
     border-radius: 5px;
     border: 2px solid transparent;
 
@@ -89,56 +96,28 @@
       }
     }
 
+    .btnLogOut {
+      margin-top: 16px;
+    }
+
     .btnLogOut:hover {
       color: $red-500;
-    }
-  }
-
-  .menu {
-    visibility: 0;
-    opacity: 0;
-    z-index: -999;
-
-    background-color: $blue-900;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 4rem;
-    right: 1rem;
-    border-radius: 8px;
-    border: 2px solid $gray-900;
-
-    padding: 2.6rem 2rem;
-
-    &.open {
-      visibility: visible;
-      opacity: 1;
-      z-index: 999;
-    }
-
-    @media screen and (min-width: $desktop) {
-      &.open {
-        visibility: 0;
-        opacity: 0;
-        z-index: -999;
-      }
     }
   }
 
   .orderBtn {
     background-color: $red-500;
     color: $white;
+    height: 38px;
 
     font-family: 'Poppins', sans-serif;
     font-size: 0.875rem;
     font-weight: 500;
+    order: 1;
+    margin-top: 12px;
+    width: 8.5rem;
 
-    width: 13.5rem;
-
-    padding: 0.75rem;
+    padding: 0.5rem 0.75rem;
     display: flex;
     gap: 0.75rem;
     align-items: center;
@@ -149,22 +128,24 @@
   }
 }
 
-.desktopOnly {
-  height: 0;
-  opacity: 0;
-  visibility: hidden;
-  z-index: -9999;
-}
-
 @media (min-width: $desktop) {
   .header {
     justify-content: center;
     align-items: center;
     gap: 3rem;
+    height: auto;
 
     .buttons {
       width: 1.25rem;
       order: 1;
+    }
+
+    .orderBtn {
+      height: 46px;
+    }
+
+    .btnLogOut {
+      margin-top: 0;
     }
 
     .search {
@@ -178,30 +159,6 @@
       background-color: $blue-800;
       padding: 0.35rem 0.875rem;
       border-radius: 5px;
-    }
-  }
-
-  .desktopOnly {
-    height: initial;
-    opacity: 1;
-    visibility: visible;
-    z-index: 1;
-  }
-
-  .btnMenu {
-    width: 0;
-    opacity: 0;
-    visibility: hidden;
-
-    &::after {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    & svg {
-      opacity: 0;
-      visibility: hidden;
-      width: 0%;
     }
   }
 }
