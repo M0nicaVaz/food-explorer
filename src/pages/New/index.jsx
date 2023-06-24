@@ -82,6 +82,18 @@ export function New() {
     ingredients((prevState) => prevState.filter((tag) => tag !== deleted));
   }
 
+  async function handleDelete() {
+    if (product.title) {
+      try {
+        await api.delete(`/products/${String(productId)}`);
+        toast.success('Prato removido com sucesso!');
+        navigate("/");
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  }
+
   useEffect(() => {
     const ingredients = [];
     const newingredients = ingredients.map((tag) => tag.name);
@@ -234,7 +246,7 @@ export function New() {
 
           {product.title ? (
             <div className={styles.buttons}>
-              <button className={styles.buttonRemove}> Excluir Prato</button>
+              <button className={styles.buttonRemove} onClick={handleDelete} type='button'> Excluir Prato</button>
               <button className={styles.buttonSave} type="submit">
                 {' '}
                 Salvar alterações
