@@ -1,7 +1,18 @@
+@keyframes spaceLetters {
+  0% {
+    letter-spacing: 0;
+  }
+
+  100% {
+    letter-spacing: 0.2rem;
+  }
+}
+
 .loading {
   display: block;
   margin: auto;
   color: $blue-100;
+  animation: spaceLetters 600ms infinite alternate;
 }
 
 .content {

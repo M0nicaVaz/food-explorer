@@ -1,3 +1,20 @@
+@keyframes pulse {
+  0% {
+    scale: 0.98;
+    border: 1px solid $blue-100;
+  }
+
+  50% {
+    scale: 1;
+    border: 1px solid $blue-50;
+  }
+
+  100% {
+    scale: 0.98;
+    border: 1px solid $blue-100;
+  }
+}
+
 .wrapper {
   background-color: $gray-50;
   border: 1px solid $blue-50;
@@ -14,6 +31,10 @@
   text-align: center;
 
   padding: 1.3125rem 1.8125rem 2.25rem;
+
+  &:hover {
+    animation: pulse infinite 1000ms forwards;
+  }
 
   button {
     border: none;
