@@ -148,6 +148,36 @@
   }
 }
 
+.buttons {
+  display: flex;
+  margin-top: 2rem;
+  gap: 1rem;
+  align-self: flex-end;
+
+  button {
+    padding: 10px 24px;
+    border-radius: 5px;
+  }
+
+  .buttonSave {
+    background-color: $red-400;
+    border: none;
+    color: $white;
+  }
+
+  .buttonRemove {
+    background-color: $blue-50;
+    border: none;
+    color: $white;
+  }
+
+  .buttonSave {
+    background-color: $red-400;
+    border: none;
+    color: $white;
+  }
+}
+
 .buttonAdd {
   width: min(22.3125rem, 80vw);
   flex: 1;

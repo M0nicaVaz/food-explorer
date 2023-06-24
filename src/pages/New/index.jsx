@@ -94,10 +94,7 @@ export function New() {
     }
 
     getProduct()
-    console.log(product)
   }, [])
-
-
 
   return (
     <main className={styles.content}>
@@ -199,7 +196,17 @@ export function New() {
             />
           </div>
 
-          <button className={styles.buttonAdd} > Adicionar Prato</button>
+
+          {
+            product.title ?
+              <div className={styles.buttons}>
+                <button className={styles.buttonRemove}> Excluir Prato</button>
+                <button className={styles.buttonSave}> Salvar alterações</button>
+              </div>
+              :
+              <button className={styles.buttonAdd}>Adicionar Prato</button>
+          }
+
         </form>
       </section>
     </main >
