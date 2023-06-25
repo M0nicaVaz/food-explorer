@@ -15,6 +15,7 @@ export function AdminHeader() {
   const { setSearch } = useSearch()
   const { signOut } = useAuth()
   const { pathname } = window.location
+  const isAtHomePage = pathname === '/'
 
   return (
     <header className={styles.header}>
@@ -26,12 +27,10 @@ export function AdminHeader() {
         <span>admin</span>
       </div>
 
-
       <div className={styles.search}>
         <MagnifyingGlass size={22} />
-        <input disabled={pathname !== "/"} type="text" id="search" placeholder="Busque por pratos ou ingredientes" onChange={(e) => setSearch(e.target.value)} />
+        <input disabled={!isAtHomePage} type="text" id="search" placeholder={isAtHomePage ? "Busque por pratos ou ingredientes" : "Busca ativa na tela de início"} onChange={(e) => setSearch(e.target.value)} />
       </div>
-
 
       <Link to="/admin/new" className={`${styles.orderBtn}`}>
         Novo prato
