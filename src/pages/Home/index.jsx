@@ -1,66 +1,80 @@
-
 import heroSVG from '../../assets/hero.svg';
 import { Card } from '../../components/Card';
 import styles from './home.module.scss';
 import { useEffect, useState } from 'react';
 import { api } from '../../services/api';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { useScreenSize } from '../../context/useScreenSize';
-import 'swiper/css';
 import { useSearch } from '../../context/useSearch';
+import { Section } from './Section';
 
 export function Home() {
-  const [isLoading, setIsLoading] = useState(true)
-  const [products, setProducts] = useState([])
-  const [searchProducts, setSearchProducts] = useState([])
-  const [foundProducts, setFoundProducts] = useState([])
-  const { screenSize } = useScreenSize()
-  const { search } = useSearch()
-  const isSearchActive = search !== undefined && search !== ''
+  const [isLoading, setIsLoading] = useState(true);
+  const [products, setProducts] = useState([]);
+  const [searchProducts, setSearchProducts] = useState([]);
+  const [foundProducts, setFoundProducts] = useState([]);
+  const { screenSize } = useScreenSize();
+  const { search } = useSearch();
+  const isSearchActive = search !== undefined && search !== '';
 
   function getSlidesPerView() {
-    if (screenSize === 'fullHd') return 3
-    if (screenSize === 'desktop') return 3
-    if (screenSize === 'tablet') return 2
-    return 1
+    if (screenSize === 'fullHd') return 3;
+    if (screenSize === 'desktop') return 3;
+    if (screenSize === 'tablet') return 2;
+    return 1;
+  }
+
+  async function getProducts() {
+    try {
+      const { data } = await api.get(`/products/`);
+
+      if (data) {
+        const dataWithFormattedImageUrl = data.map((product) => {
+          return {
+            ...product,
+            src: `${api.defaults.baseURL}/files/${product.image}`,
+          };
+        });
+
+        const meals = dataWithFormattedImageUrl.filter(
+          (product) => product.type === 'meal'
+        );
+        const desserts = dataWithFormattedImageUrl.filter(
+          (product) => product.type === 'dessert'
+        );
+        const drinks = dataWithFormattedImageUrl.filter(
+          (product) => product.type === 'drink'
+        );
+
+        setProducts({ meals, desserts, drinks });
+        setSearchProducts(dataWithFormattedImageUrl);
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
-    const found = searchProducts.filter((product) => product.title.toLowerCase().includes(search.toLowerCase()))
-    setFoundProducts(found)
-    console.log(found)
-  }, [search])
+    const foundByTitle = searchProducts.filter((product) =>
+      product.title.toLowerCase().includes(search.toLowerCase())
+    );
+
+    const foundByIngredient = searchProducts.filter((product) =>
+      product.ingredients.find((ingredient) =>
+        ingredient.name.toLowerCase().includes(search.toLowerCase())
+      )
+    );
+
+    const foundByTitleOrIngredient = new Set([
+      ...foundByTitle,
+      ...foundByIngredient,
+    ]);
+    setFoundProducts([...foundByTitleOrIngredient]);
+  }, [search]);
 
   useEffect(() => {
-    async function getProducts() {
-      try {
-        const { data } = await api.get(`/products/`)
-
-        if (data) {
-          const dataWithFormattedImageUrl = data.map((product) => {
-            return {
-              ...product, src: `${api.defaults.baseURL}/files/${product.image}`
-            }
-          })
-
-          const meals = dataWithFormattedImageUrl.filter((product) => product.type === 'meal')
-          const desserts = dataWithFormattedImageUrl.filter((product) => product.type === 'dessert')
-          const drinks = dataWithFormattedImageUrl.filter((product) => product.type === 'drink')
-
-          setProducts({ meals, desserts, drinks })
-          setSearchProducts(dataWithFormattedImageUrl)
-          setIsLoading(false)
-        }
-      }
-      catch (error) {
-        console.log(error)
-      }
-    }
-
-    getProducts()
-  }, [])
-
-
+    getProducts();
+  }, []);
 
   return (
     <main className={styles.content}>
@@ -74,79 +88,36 @@ export function Home() {
         </div>
       </div>
 
-
-      {
-        isSearchActive ?
-          <section>
-            <strong className={styles.sectionTitle}>Item(s) encontrado(s) </strong>
-            {foundProducts.map((product) => (
-              <SwiperSlide key={product.id}>
-                <Card data={product} />
-              </SwiperSlide>
-            ))}
-          </section>
-          :
-          <>
-            <section >
-              <strong className={styles.sectionTitle}> Pratos principais</strong>
-              {
-                isLoading ? <span className={styles.loading} >Carregando...</span> :
-                  <Swiper
-                    className={styles.swiper}
-                    spaceBetween={24}
-                    slidesPerView={getSlidesPerView()}
-                  >
-                    {products.meals.map((meal) => (
-                      <SwiperSlide key={meal.id}>
-                        <Card data={meal} />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-              }
-            </section>
-
-            <section >
-              <strong className={styles.sectionTitle}> Sobremesas</strong>
-              {
-                isLoading ? <span className={styles.loading} >Carregando...</span> :
-                  <Swiper
-                    className={styles.swiper}
-                    spaceBetween={24}
-                    slidesPerView={getSlidesPerView()}
-                  >
-                    <div>
-                      {products.desserts.map((dessert) => (
-                        <SwiperSlide key={dessert.id}>
-                          <Card data={dessert} />
-                        </SwiperSlide>
-                      ))}
-                    </div>
-                  </Swiper>
-              }
-            </section>
-
-            <section  >
-              <strong className={styles.sectionTitle}> Bebidas</strong>
-              {
-                isLoading ? <span className={styles.loading} >Carregando...</span> :
-                  <Swiper
-                    className={styles.swiper}
-                    spaceBetween={24}
-                    slidesPerView={getSlidesPerView()}
-                  >
-                    <div>
-                      {products.drinks.map((drink) => (
-                        <SwiperSlide key={drink.id}>
-                          <Card data={drink} />
-                        </SwiperSlide>
-                      ))}
-                    </div>
-                  </Swiper>
-              }
-            </section>
-          </>
-      }
-
+      {isSearchActive ? (
+        <Section
+          title="Item(s) encontrado(s)"
+          data={foundProducts}
+          getSlidesPerView={getSlidesPerView}
+          isLoading={false}
+          isSearch
+        />
+      ) : (
+        <>
+          <Section
+            title="Pratos principais"
+            data={products.meals}
+            getSlidesPerView={getSlidesPerView}
+            isLoading={isLoading}
+          />
+          <Section
+            title="Sobremesas"
+            data={products.desserts}
+            getSlidesPerView={getSlidesPerView}
+            isLoading={isLoading}
+          />
+          <Section
+            title="Bebidas"
+            data={products.drinks}
+            getSlidesPerView={getSlidesPerView}
+            isLoading={isLoading}
+          />
+        </>
+      )}
     </main>
   );
 }
