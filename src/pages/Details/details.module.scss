@@ -21,8 +21,11 @@
   margin: 2rem auto;
   padding: 0 1rem;
   display: grid;
+  align-items: center;
+  justify-content: center;
 
   .backBtn {
+    width: fit-content;
     background: none;
     border: none;
     color: $white;
@@ -32,6 +35,11 @@
 
     font-weight: 500;
     font-size: 1.5rem;
+    margin-top: 1.5rem;
+
+    @media (min-width: $desktop) {
+      margin-top: 0;
+    }
   }
 
   .details {
@@ -68,6 +76,7 @@
     }
 
     .contentWrapper {
+      width: 100%;
       max-width: 38rem;
 
       .title {
@@ -78,6 +87,7 @@
 
         @media screen and (min-width: $desktop) {
           text-align: left;
+          width: 38rem;
         }
       }
 
@@ -118,7 +128,9 @@
 }
 
 .orderBtn {
-  width: fit-content;
+  display: block !important;
+  width: 100%;
+  text-align: center;
   background-color: $red-500;
   color: $white;
   font-family: 'Poppins', sans-serif;
@@ -128,4 +140,33 @@
   display: flex;
   border: none;
   border-radius: 5px;
+
+  @media (min-width: $desktop) {
+    width: fit-content;
+  }
+}
+
+.ingredients {
+  margin-bottom: 52px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+
+  span {
+    border-radius: 5px;
+    background: $blue-800;
+    padding: 4px 8px;
+    color: $white;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+    text-transform: lowercase;
+  }
+
+  @media screen and (min-width: $desktop) {
+    width: 38rem;
+    justify-content: unset;
+  }
 }
