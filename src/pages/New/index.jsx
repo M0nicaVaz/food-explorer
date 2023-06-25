@@ -1,19 +1,21 @@
-import { CaretLeft, UploadSimple, Plus } from 'phosphor-react';
+import { CaretLeft } from 'phosphor-react';
 import { useNavigate } from 'react-router-dom';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { api } from '../../services/api';
 
 import styles from './new.module.scss';
 import { toast } from 'react-toastify';
 import { useRef, useState } from 'react';
-import { NewTag } from '../../components/NewTag';
+import { Ingredient } from '../../components/Ingredient';
 import { useEffect } from 'react';
 
 export function New() {
   const [product, setProduct] = useState({});
   const [image, setImage] = useState(null);
   const [ingredients, setIngredients] = useState([]);
-  const [newTag, setNewTag] = useState('');
+  const [newIngredient, setNewIngredient] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
   const form = useRef(null);
   const searchParams = new URLSearchParams(document.location.search);
@@ -37,7 +39,7 @@ export function New() {
       const formData = new FormData();
 
       formData.append('image', image[0]);
-      data = { ...data, image: image[0].name };
+      data = { ...data, ingredients, image: image[0].name };
       formData.append('data', JSON.stringify(data));
 
       const res = await api.post('/products', formData);
@@ -57,7 +59,7 @@ export function New() {
       const formData = new FormData();
 
       if (isImage) formData.append('image', image[0]);
-      data = { ...data, image: isImage ? image[0].name : null };
+      data = { ...data, ingredients, image: isImage ? image[0].name : null };
       formData.append('data', JSON.stringify(data));
 
       const res = await api.put(`/products/${String(productId)}`, formData);
@@ -69,17 +71,19 @@ export function New() {
     }
   });
 
-  function handleAddTag() {
-    if (newTag.trim().length === 0) {
+  function handleAddIngredient() {
+    if (newIngredient.trim().length === 0) {
       return null;
     }
 
-    setIngredients((prevState) => [...prevState, newTag]);
-    setNewTag('');
+    setIngredients((prevState) => [...prevState, newIngredient]);
+    setNewIngredient('');
   }
 
-  function handleRemoveTag(deleted) {
-    ingredients((prevState) => prevState.filter((tag) => tag !== deleted));
+  function handleRemoveIngredient(deleted) {
+    setIngredients((prevState) =>
+      prevState.filter((ingredient) => ingredient !== deleted)
+    );
   }
 
   async function handleDelete() {
@@ -87,30 +91,30 @@ export function New() {
       try {
         await api.delete(`/products/${String(productId)}`);
         toast.success('Prato removido com sucesso!');
-        navigate("/");
+        navigate('/');
       } catch (err) {
         console.error(err);
       }
     }
   }
 
-  useEffect(() => {
-    const ingredients = [];
-    const newingredients = ingredients.map((tag) => tag.name);
-    setNewTag(newingredients);
-  }, []);
+
 
   useEffect(() => {
     async function getProduct() {
-      if (!product) return;
+      if (!productId) return;
 
       try {
+        setIsLoading(true);
         const { data } = await api.get(`/products/${productId}`);
         const productImageUrl = `${api.defaults.baseURL}/files/${data.image}`;
 
         if (data) {
-          setProduct({ ...data, src: productImageUrl });
+          const formatted = { ...data, src: productImageUrl }
+          setProduct(formatted);
         }
+
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -119,12 +123,21 @@ export function New() {
     getProduct();
   }, []);
 
+  useEffect(() => {
+    const ingredients = product.ingredients || [];
+    const newIngredients = ingredients.map((tag) => tag.name);
+    setIngredients(newIngredients);
+
+    console.log(product.title)
+  }, [product]);
+
   return (
     <main className={styles.content}>
       <button className={styles.backBtn} onClick={handleGoBack}>
         <CaretLeft />
         voltar
       </button>
+
 
       <section className={styles.edit}>
         <strong>Editar prato</strong>
@@ -140,7 +153,7 @@ export function New() {
                 className={styles.inputFile}
                 onChange={(e) => setImage(e.target.files)}
               />
-              <small>{image && image[0].name}</small>
+              <small>{image && image[0].name || product.image}</small>
             </div>
 
             <div className={`${styles.inputAndLabel} ${styles.big}`}>
@@ -175,23 +188,23 @@ export function New() {
             <div>
               <label htmlFor="ingredients">Ingredientes</label>
               <div className={styles.ingredients}>
-                {ingredients.map((tag, index) => (
-                  <NewTag
+                {ingredients.map((ingredient, index) => (
+                  <Ingredient
                     key={String(index)}
-                    value={tag}
+                    value={ingredient}
                     onClick={() => {
-                      handleRemoveTag(tag);
+                      handleRemoveIngredient(ingredient);
                     }}
                   />
                 ))}
 
-                <NewTag
+                <Ingredient
                   isNew
                   maxLength={30}
                   placeholder="Adicionar"
-                  onChange={(e) => setNewTag(e.target.value)}
-                  value={newTag}
-                  onClick={handleAddTag}
+                  onChange={(e) => setNewIngredient(e.target.value)}
+                  value={newIngredient}
+                  onClick={handleAddIngredient}
                 />
               </div>
             </div>
@@ -246,7 +259,14 @@ export function New() {
 
           {product.title ? (
             <div className={styles.buttons}>
-              <button className={styles.buttonRemove} onClick={handleDelete} type='button'> Excluir Prato</button>
+              <button
+                className={styles.buttonRemove}
+                onClick={handleDelete}
+                type="button"
+              >
+                {' '}
+                Excluir Prato
+              </button>
               <button className={styles.buttonSave} type="submit">
                 {' '}
                 Salvar alterações
@@ -257,6 +277,7 @@ export function New() {
           )}
         </form>
       </section>
+
     </main>
   );
 }

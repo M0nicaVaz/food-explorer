@@ -6,6 +6,7 @@
   padding: 0 2rem;
 
   .backBtn {
+    width: fit-content;
     background: none;
     border: none;
     color: $white;
@@ -16,6 +17,11 @@
     font-weight: 500;
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+
+    @media (min-width: $desktop) {
+      margin-top: 0;
+    }
   }
 
   strong {
@@ -67,8 +73,8 @@
       }
 
       input {
-        background-color: transparent;
-        border: 1px solid $white;
+        background-color: $blue-800;
+        border: 1px solid transparent;
         border-radius: 5px;
         padding: 0.75rem 0.875rem;
         margin-top: 0.5rem;
@@ -81,7 +87,8 @@
         &::before {
           content: url('../../assets/UploadSimple.svg') '  Selecione imagem';
           cursor: pointer;
-          background-color: $gray-900;
+          background-color: $blue-800;
+          border: 1px solid transparent;
           z-index: 9999;
           text-align: center;
 
@@ -89,7 +96,6 @@
           width: 100%;
           top: 0;
           left: 0;
-          border: 1px solid $white;
 
           border-radius: 5px;
           padding: 0.625rem 0.875rem;
@@ -114,8 +120,8 @@
     }
 
     textarea {
-      background-color: transparent;
-      border: 1px solid $white;
+      background-color: $blue-800;
+      border: 1px solid transparent;
       border-radius: 5px;
       padding: 0.75rem 0.875rem;
 
@@ -203,11 +209,17 @@
   }
 }
 
-.tags {
+.ingredients {
   border-radius: 0.8rem;
   flex: 1;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
+}
+.loading {
+  display: block;
+  margin: auto;
+  color: $blue-100;
+  animation: spaceLetters 600ms infinite alternate;
 }
