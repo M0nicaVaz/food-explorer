@@ -2,16 +2,22 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: $blue-50;
+  background-color: $blue-800;
   color: $blue-100;
   border: none;
   border-radius: 6px;
   padding: 0.25rem 1rem;
-
-  background-color: transparent;
-  border: 1px solid $white;
+  border: 1px solid transparent;
   border-radius: 5px;
   margin-top: 0.5rem;
+
+  &.new {
+    border: 1px dashed $gray-100;
+  }
+
+  &:focus-within {
+    border: 1px solid $blue-100;
+  }
 
   input {
     white-space: nowrap;

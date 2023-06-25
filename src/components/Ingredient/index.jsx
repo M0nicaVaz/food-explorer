@@ -1,10 +1,10 @@
-import styles from './NewTag.module.scss'
+import styles from './ingredients.module.scss'
 import { Plus, TrashSimple } from 'phosphor-react'
 
-export function NewTag({ isNew, value, onClick, ...rest }) {
+export function Ingredient({ isNew, value, onClick, ...rest }) {
     return (
-        <div className={`${styles.container}`} >
-            <input type="text" value={value} readOnly={!isNew} {...rest} />
+        <div className={`${styles.container} ${isNew ? styles.new : styles.remove}`} >
+            <input type="text" value={value} readOnly={!isNew}  {...rest} />
             <button
                 type="button"
                 onClick={onClick}
