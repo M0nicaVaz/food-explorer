@@ -20,18 +20,16 @@
   border: 1px solid $blue-50;
   border-radius: 16px;
 
-  max-width: 380px;
+  max-width: 256px;
   min-width: 18.75rem;
-  gap: 1rem;
-  height: 32rem;
+  min-height: 25.875rem;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   text-align: center;
 
-  padding: 1.3125rem 1.8125rem 2.25rem;
+  padding: 24px;
 
   &:hover {
     animation: pulse infinite 1000ms forwards;
@@ -42,7 +40,13 @@
   }
 
   img {
-    width: clamp(8rem, 8rem + 5vw, 11rem);
+    width: 176px;
+    height: 176px;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    margin-top: 24px;
   }
 
   .title {
@@ -65,6 +69,7 @@
   .price {
     color: $blue-100;
     font-size: clamp(1.4rem, 1.4rem + 0.5vw, 2rem);
+    font-family: 'Roboto', sans-serif;
   }
 
   form {
@@ -106,4 +111,17 @@
       padding: 12px 24px;
     }
   }
+}
+
+.textWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.editBtn {
+  margin-left: auto;
 }
